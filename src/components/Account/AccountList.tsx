@@ -1,4 +1,4 @@
-import { useAccounts } from "@/hooks/useAccounts";
+import { useSearchAccountsQuery } from "@/hooks/useSearchAccountsQuery";
 import { getFormattedAmount } from "@/utils/formatting/getformattedAmount";
 import {
   Paper,
@@ -14,7 +14,8 @@ import { FC } from "react";
 type AccountListProps = {};
 
 const AccountList: FC<AccountListProps> = () => {
-  const { data: accounts, isLoading: isAccountsLoading } = useAccounts();
+  const { data: accounts, isLoading: isAccountsLoading } =
+    useSearchAccountsQuery();
 
   return (
     <TableContainer component={Paper}>
