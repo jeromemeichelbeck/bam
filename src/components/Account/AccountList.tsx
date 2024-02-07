@@ -1,5 +1,5 @@
 import { useAccounts } from "@/hooks/useAccounts";
-import { getFormattedAmount } from "@/utils/getformattedAmount";
+import { getFormattedAmount } from "@/utils/formatting/getformattedAmount";
 import {
   Paper,
   Table,
