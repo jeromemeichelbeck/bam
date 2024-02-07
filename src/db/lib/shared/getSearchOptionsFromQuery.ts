@@ -7,10 +7,16 @@ export const getSearchOptionsFromQuery = <T extends Record<string, unknown>>(
 ) => {
   // We won't do any validation here, as it is not the scope of the project
   return {
-    limit: Number(query.limit) || DEFAULT_LIMIT,
-    skip: Number(query.skip) || DEFAULT_SKIP,
+    ...query,
+    limit:
+      query.limit && !Array.isArray(query.limit)
+        ? parseInt(query.limit)
+        : DEFAULT_LIMIT,
+    skip:
+      query.skip && !Array.isArray(query.skip)
+        ? parseInt(query.skip)
+        : DEFAULT_SKIP,
     sortBy: query.sortBy as keyof T,
     sortOrder: (query.sortOrder as SortOrder) || "asc",
-    ...query,
   };
 };
