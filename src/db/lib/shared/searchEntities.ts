@@ -23,8 +23,6 @@ export const searchEntities = <T extends Record<string, unknown>>(
     ...query
   } = searchOptions;
 
-  console.log({ query });
-
   const filteredEntities = entities.filter((entity) => {
     // Filter
     return Object.entries(query).every(([key, value]) => {
