@@ -1,3 +1,4 @@
+import { deleteAccount } from "@/db/lib/accounts/deleteAccount";
 import { getOneAccountById } from "@/db/lib/accounts/getOneAccountById";
 import { searchAccounts } from "@/db/lib/accounts/searchAccounts";
 import { updateAccount } from "@/db/lib/accounts/updateAccount";
@@ -89,6 +90,33 @@ export default async function handler(
         return res.status(500).json({
           code: "INTERNAL_SERVER_ERROR",
           message: "An error occurred while updating the account",
+        });
+      }
+
+    case "DELETE":
+      const accountToDelete = await getOneAccountById(accountId);
+      if (!accountToDelete) {
+        return res.status(404).json({
+          code: "NOT_FOUND",
+          message: "Account not found",
+        });
+      }
+
+      // Delete the account
+      try {
+        const id = await deleteAccount(accountId);
+        if (!id) {
+          // Should not happen
+          return res.status(404).json({
+            code: "NOT_FOUND",
+            message: "Account not found",
+          });
+        }
+        return res.status(204).end();
+      } catch (error) {
+        return res.status(500).json({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "An error occurred while deleting the account",
         });
       }
 
