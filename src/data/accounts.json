@@ -1,0 +1,26 @@
+[
+  {
+    "accountId": 1,
+    "ownerId": 1,
+    "name": "current",
+    "balance": 125000
+  },
+  {
+    "accountId": 2,
+    "ownerId": 1,
+    "name": "savings",
+    "balance": 500000
+  },
+  {
+    "accountId": 3,
+    "ownerId": 2,
+    "name": "current",
+    "balance": 250000
+  },
+  {
+    "accountId": 4,
+    "ownerId": 2,
+    "name": "savings",
+    "balance": 1000000
+  }
+]
