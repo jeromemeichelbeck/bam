@@ -1,4 +1,4 @@
-import { Account } from "@/types/account";
+import { useAccounts } from "@/hooks/useAccounts";
 import { getFormattedAmount } from "@/utils/getformattedAmount";
 import {
   Paper,
@@ -9,20 +9,12 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 
 type AccountListProps = {};
 
 const AccountList: FC<AccountListProps> = () => {
-  const { data: accounts, isLoading: isAccountsLoading } = useQuery({
-    queryKey: ["accounts"],
-    queryFn: async () => {
-      const response = await fetch("/api/accounts");
-      const data = await response.json();
-      return data as Account[];
-    },
-  });
+  const { data: accounts, isLoading: isAccountsLoading } = useAccounts();
 
   return (
     <TableContainer component={Paper}>
