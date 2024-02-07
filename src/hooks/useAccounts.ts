@@ -1,4 +1,4 @@
-import { searchAccounts } from "@/api/account/searchAccounts";
+import { searchAccounts } from "@/services/api/account/searchAccounts";
 import { useQuery } from "@tanstack/react-query";
 
 export const useAccounts = () =>
