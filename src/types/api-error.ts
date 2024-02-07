@@ -1,5 +1,5 @@
 export type ApiError = {
-  code: "INTERNAL_SERVER_ERROR" | "NOT_FOUND" | "BAD_REQUEST";
+  code: "INTERNAL_SERVER_ERROR" | "NOT_FOUND" | "BAD_REQUEST" | "CONFLICT";
   message?: string;
 };
 
