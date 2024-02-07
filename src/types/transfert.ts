@@ -1,10 +1,10 @@
 import { Account } from "./account";
 
 export type Transfert = {
-  transfertId: number;
+  id: number;
   date: string; // ISO 8601
-  fromAccountId: Account["accountId"];
-  toAccountId: Account["accountId"];
+  fromAccountId: Account["id"];
+  toAccountId: Account["id"];
   amount: number; // in cents, fromAccountCurrency
   rate: number; // fromAccountCurrency to toAccountCurrency at the time of the tansfert
 };

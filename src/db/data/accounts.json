@@ -1,26 +1,30 @@
 [
   {
-    "accountId": 1,
+    "id": 1,
     "ownerId": 1,
     "name": "current",
+    "currency": "EUR",
     "balance": 125000
   },
   {
-    "accountId": 2,
+    "id": 2,
     "ownerId": 1,
     "name": "savings",
+    "currency": "EUR",
     "balance": 500000
   },
   {
-    "accountId": 3,
+    "id": 3,
     "ownerId": 2,
     "name": "current",
+    "currency": "USD",
     "balance": 250000
   },
   {
-    "accountId": 4,
+    "id": 4,
     "ownerId": 2,
     "name": "savings",
+    "currency": "USD",
     "balance": 1000000
   }
 ]

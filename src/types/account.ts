@@ -2,8 +2,8 @@ import { Currency } from "./currency";
 import { Owner } from "./owner";
 
 export type Account = {
-  accountId: number;
-  ownerId: Owner["ownerId"];
+  id: number;
+  ownerId: Owner["id"];
   currency: Currency;
   balance: number; // in cents
 };

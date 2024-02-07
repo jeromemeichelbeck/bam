@@ -1,4 +1,4 @@
 export type Owner = {
-  ownerId: number;
+  id: number;
   name: string;
 };
