@@ -1,7 +1,7 @@
 import { useAddAccountForm } from "@/hooks/useAddAccountForm";
 import { Button, Stack, TextField } from "@mui/material";
 import { FC } from "react";
-import CurrencySelect from "../UI/Form/CurrencySelect";
+import CurrencySelect from "../shared/CurrencySelect";
 
 type AddAccountFormProps = {};
 

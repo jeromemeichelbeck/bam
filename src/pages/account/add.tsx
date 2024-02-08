@@ -1,4 +1,4 @@
-import AddAccountForm from "@/components/Account/AddAccountForm";
+import AddAccountForm from "@/components/account/AddAccountForm";
 
 export default function AddAccount() {
   return <AddAccountForm />;

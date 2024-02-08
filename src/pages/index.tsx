@@ -1,4 +1,4 @@
-import AccountContainer from "@/components/Account/AccountContainer";
+import AccountContainer from "@/components/account/AccountContainer";
 import { Typography } from "@mui/material";
 import Head from "next/head";
 
