@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 
 export const useAddAccountForm = () => {
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -16,5 +17,5 @@ export const useAddAccountForm = () => {
     await addAccount(data);
   });
 
-  return { register, errors, handleAddAccount };
+  return { control, register, errors, handleAddAccount };
 };

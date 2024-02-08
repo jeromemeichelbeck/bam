@@ -1,3 +1,4 @@
+import { availableCurrencies } from "@/constants/currencies";
 import { z } from "zod";
 
 export const accountFormSchema = z.object({
@@ -6,7 +7,7 @@ export const accountFormSchema = z.object({
     .int()
     .positive("Owner id must be a positive integer"),
   name: z.string().min(1, "Account name is required"),
-  currency: z.enum(["USD", "EUR"]),
+  currency: z.enum(availableCurrencies),
   balance: z.coerce.number().positive("Initial balance must be positive"),
 });
 

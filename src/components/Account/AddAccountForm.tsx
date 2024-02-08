@@ -1,11 +1,12 @@
 import { useAddAccountForm } from "@/hooks/useAddAccountForm";
 import { Button, Stack, TextField } from "@mui/material";
 import { FC } from "react";
+import CurrencySelect from "../UI/Form/CurrencySelect";
 
 type AddAccountFormProps = {};
 
 const AddAccountForm: FC<AddAccountFormProps> = () => {
-  const { register, handleAddAccount, errors } = useAddAccountForm();
+  const { control, register, handleAddAccount, errors } = useAddAccountForm();
 
   return (
     <form onSubmit={handleAddAccount}>
@@ -26,13 +27,14 @@ const AddAccountForm: FC<AddAccountFormProps> = () => {
           helperText={errors.name?.message}
           fullWidth
         />
-        <TextField
+        <CurrencySelect control={control} />
+        {/* <TextField
           {...register("currency")}
           label="Account Currency"
           error={!!errors.currency}
           helperText={errors.currency?.message}
           fullWidth
-        />
+        /> */}
         <TextField
           {...register("balance")}
           type="number"

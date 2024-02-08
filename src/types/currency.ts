@@ -1,1 +1,3 @@
-export type Currency = "USD" | "EUR" | "GPB" | "JPY";
+import { availableCurrencies } from "@/constants/currencies";
+
+export type Currency = (typeof availableCurrencies)[number];

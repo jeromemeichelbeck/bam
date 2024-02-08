@@ -1,5 +1,5 @@
 import { useSearchAccountsQuery } from "@/hooks/useSearchAccountsQuery";
-import { getFormattedAmount } from "@/utils/formatting/getformattedAmount";
+import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import {
   Paper,
   Table,
