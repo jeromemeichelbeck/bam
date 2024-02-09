@@ -1,5 +1,4 @@
 import AccountContainer from "@/components/account/AccountContainer";
-import { Typography } from "@mui/material";
 import Head from "next/head";
 
 export default function Home() {
@@ -12,7 +11,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Typography variant="h1">Bank Account Manager</Typography>
         <AccountContainer />
       </main>
     </>

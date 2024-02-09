@@ -1,3 +1,4 @@
+import Layout from "@/components/Layout";
 import MuiProvider from "@/services/providers/MuiProvider";
 import QueryProvider from "@/services/providers/QueryProvider";
 import type { AppProps } from "next/app";
@@ -8,7 +9,9 @@ export default function App(props: AppProps) {
   return (
     <MuiProvider {...props}>
       <QueryProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </QueryProvider>
     </MuiProvider>
   );
