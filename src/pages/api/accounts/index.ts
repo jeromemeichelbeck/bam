@@ -1,9 +1,9 @@
-import { addAccount } from "@/db/lib/accounts/addAccount";
-import { searchAccounts } from "@/db/lib/accounts/searchAccounts";
-import { getSearchOptionsFromQuery } from "@/db/lib/shared/getSearchOptionsFromQuery";
 import { Account } from "@/types/account";
 import { Maybe } from "@/types/api-error";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { addAccount } from "../../../../db/lib/accounts/addAccount";
+import { searchAccounts } from "../../../../db/lib/accounts/searchAccounts";
+import { getSearchOptionsFromQuery } from "../../../../db/lib/shared/getSearchOptionsFromQuery";
 
 export default async function handler(
   req: NextApiRequest,

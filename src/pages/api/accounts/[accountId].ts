@@ -1,10 +1,10 @@
-import { deleteAccount } from "@/db/lib/accounts/deleteAccount";
-import { getOneAccountById } from "@/db/lib/accounts/getOneAccountById";
-import { searchAccounts } from "@/db/lib/accounts/searchAccounts";
-import { updateAccount } from "@/db/lib/accounts/updateAccount";
 import { Account } from "@/types/account";
 import { Maybe } from "@/types/api-error";
 import { NextApiRequest, NextApiResponse } from "next";
+import { deleteAccount } from "../../../../db/lib/accounts/deleteAccount";
+import { getOneAccountById } from "../../../../db/lib/accounts/getOneAccountById";
+import { searchAccounts } from "../../../../db/lib/accounts/searchAccounts";
+import { updateAccount } from "../../../../db/lib/accounts/updateAccount";
 
 export default async function handler(
   req: NextApiRequest,
