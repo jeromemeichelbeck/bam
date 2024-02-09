@@ -26,5 +26,12 @@
     "name": "savings",
     "currency": "USD",
     "balance": 1000000
+  },
+  {
+    "ownerId": 1,
+    "name": "new",
+    "currency": "EUR",
+    "balance": 0,
+    "id": 5
   }
 ]

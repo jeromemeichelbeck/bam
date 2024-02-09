@@ -15,7 +15,12 @@ type AccountListProps = {};
 
 const AccountList: FC<AccountListProps> = () => {
   const { data: accounts, isLoading: isAccountsLoading } =
-    useSearchAccountsQuery();
+    useSearchAccountsQuery(
+      {},
+      "j",
+      { sortBy: "id", sortOrder: "asc" },
+      { page: 1, perPage: 20 },
+    );
 
   return (
     <TableContainer component={Paper}>

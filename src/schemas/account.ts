@@ -10,5 +10,3 @@ export const accountFormSchema = z.object({
   currency: z.enum(availableCurrencies),
   balance: z.coerce.number().positive("Initial balance must be positive"),
 });
-
-export type AccountFormDTO = z.infer<typeof accountFormSchema>;

@@ -1,5 +1,5 @@
+import { cleanObject } from "@/db/lib/shared/cleanObject";
 import { Account } from "@/types/account";
-import { cleanObject } from "@/utils//helpers/cleanObject";
 import { saveEntities } from "../shared/saveEntities";
 import { getAllAccounts } from "./getAllAccounts";
 
