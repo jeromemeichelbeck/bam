@@ -1,7 +1,6 @@
 import { writeFile } from "fs/promises";
 import path from "path";
-
-export type EntityName = "owners" | "accounts" | "transferts";
+import { EntityName } from "../../types/entity";
 
 export const saveEntities = async <T>(
   entities: T[],
