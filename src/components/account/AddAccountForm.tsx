@@ -2,6 +2,7 @@ import { useAddAccountForm } from "@/hooks/useAddAccountForm";
 import { Button, Stack, TextField } from "@mui/material";
 import { FC } from "react";
 import CurrencySelect from "../shared/CurrencySelect";
+import OwnerSelect from "../shared/OwnerSelect";
 
 type AddAccountFormProps = {};
 
@@ -11,14 +12,15 @@ const AddAccountForm: FC<AddAccountFormProps> = () => {
   return (
     <form onSubmit={handleAddAccount}>
       <Stack gap={2}>
-        <TextField
+        <OwnerSelect control={control} />
+        {/* <TextField
           {...register("ownerId")}
           type="number"
           label="Owner ID"
           error={!!errors.ownerId}
           helperText={errors.ownerId?.message}
           fullWidth
-        />
+        /> */}
         <TextField
           {...register("name")}
           type="text"

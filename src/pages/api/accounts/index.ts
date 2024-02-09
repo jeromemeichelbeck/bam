@@ -44,6 +44,8 @@ export default async function handler(
         });
         return res.status(201).json(newAccount);
       } catch (error) {
+        // Simply log the error for this example
+        console.log({ error });
         return res.status(500).json({
           code: "INTERNAL_SERVER_ERROR",
           message: "An error occurred while creating the account",

@@ -8,7 +8,6 @@ export const saveEntities = async <T>(
 ) => {
   const pathToFile = path.resolve(
     process.cwd(),
-    "src",
     "db",
     "data",
     `${entityName}.json`,
