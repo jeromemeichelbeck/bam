@@ -62,7 +62,7 @@ const ControlledSelect = <
               fullWidth
               inputProps={{
                 ...params.inputProps,
-                autoComplete: "disabled", // disable autocomplete and autofill
+                autoComplete: "off", // disable autocomplete and autofill
               }}
             />
           )}
