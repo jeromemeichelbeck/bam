@@ -7,20 +7,13 @@ import OwnerSelect from "../shared/OwnerSelect";
 type AddAccountFormProps = {};
 
 const AddAccountForm: FC<AddAccountFormProps> = () => {
-  const { control, register, handleAddAccount, errors } = useAddAccountForm();
+  const { isPending, control, register, handleAddAccount, errors } =
+    useAddAccountForm();
 
   return (
     <form onSubmit={handleAddAccount}>
       <Stack gap={2}>
         <OwnerSelect control={control} />
-        {/* <TextField
-          {...register("ownerId")}
-          type="number"
-          label="Owner ID"
-          error={!!errors.ownerId}
-          helperText={errors.ownerId?.message}
-          fullWidth
-        /> */}
         <TextField
           {...register("name")}
           type="text"
@@ -30,13 +23,6 @@ const AddAccountForm: FC<AddAccountFormProps> = () => {
           fullWidth
         />
         <CurrencySelect control={control} />
-        {/* <TextField
-          {...register("currency")}
-          label="Account Currency"
-          error={!!errors.currency}
-          helperText={errors.currency?.message}
-          fullWidth
-        /> */}
         <TextField
           {...register("balance")}
           type="number"
@@ -45,7 +31,9 @@ const AddAccountForm: FC<AddAccountFormProps> = () => {
           helperText={errors.balance?.message}
           fullWidth
         />
-        <Button type="submit">Add Account</Button>
+        <Button type="submit" disabled={isPending}>
+          Add Account
+        </Button>
       </Stack>
     </form>
   );
