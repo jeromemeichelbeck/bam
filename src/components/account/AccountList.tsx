@@ -10,13 +10,21 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 type AccountListProps = {};
 
 const AccountList: FC<AccountListProps> = () => {
+  const [page, setPage] = useState(1);
+  const size = 10;
+  let pages = 1;
+
   const { data: accounts, isLoading: isAccountsLoading } =
-    useSearchAccountsQuery();
+    useSearchAccountsQuery(page, size);
+
+  if (accounts) {
+    pages = Math.ceil(accounts.count / size);
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -29,12 +37,12 @@ const AccountList: FC<AccountListProps> = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {isAccountsLoading || !Array.isArray(accounts) ? (
+          {isAccountsLoading || !Array.isArray(accounts?.data) ? (
             <TableRow>
               <TableCell colSpan={3}>Loading...</TableCell>
             </TableRow>
           ) : (
-            accounts.map((account) => (
+            accounts.data.map((account) => (
               <TableRow key={account.id}>
                 <TableCell>{account.ownerId}</TableCell>
                 <TableCell>{account.name}</TableCell>
@@ -46,7 +54,13 @@ const AccountList: FC<AccountListProps> = () => {
           )}
         </TableBody>
       </Table>
-      <Pagination count={10} color="primary" sx={{ py: 2 }} />
+      <Pagination
+        count={pages}
+        page={page}
+        onChange={(_, value) => setPage(value)}
+        color="primary"
+        sx={{ py: 2 }}
+      />
     </TableContainer>
   );
 };
