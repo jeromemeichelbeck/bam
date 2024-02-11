@@ -2,29 +2,351 @@
   {
     "id": 1,
     "ownerId": 1,
-    "name": "current",
-    "currency": "EUR",
-    "balance": 125000
+    "name": "John's USD Account",
+    "currency": "USD",
+    "balance": 100000
   },
   {
     "id": 2,
-    "ownerId": 1,
-    "name": "savings",
+    "ownerId": 2,
+    "name": "Emily's EUR Account",
+    "currency": "EUR",
+    "balance": 750000
+  },
+  {
+    "id": 3,
+    "ownerId": 3,
+    "name": "Michael's GBP Account",
+    "currency": "GBP",
+    "balance": 500000
+  },
+  {
+    "id": 4,
+    "ownerId": 4,
+    "name": "Sarah's JPY Account",
+    "currency": "JPY",
+    "balance": 12000000
+  },
+  {
+    "id": 5,
+    "ownerId": 5,
+    "name": "Chris's USD Account",
+    "currency": "USD",
+    "balance": 300000
+  },
+  {
+    "id": 6,
+    "ownerId": 6,
+    "name": "Jessica's EUR Account",
+    "currency": "EUR",
+    "balance": 950000
+  },
+  {
+    "id": 7,
+    "ownerId": 7,
+    "name": "David's GBP Account",
+    "currency": "GBP",
+    "balance": 200000
+  },
+  {
+    "id": 8,
+    "ownerId": 8,
+    "name": "Jennifer's JPY Account",
+    "currency": "JPY",
+    "balance": 5000000
+  },
+  {
+    "id": 9,
+    "ownerId": 9,
+    "name": "Matt's USD Account",
+    "currency": "USD",
+    "balance": 150000
+  },
+  {
+    "id": 10,
+    "ownerId": 10,
+    "name": "Amanda's EUR Account",
+    "currency": "EUR",
+    "balance": 850000
+  },
+  {
+    "id": 11,
+    "ownerId": 11,
+    "name": "Dan's GBP Account",
+    "currency": "GBP",
+    "balance": 600000
+  },
+  {
+    "id": 12,
+    "ownerId": 12,
+    "name": "Lisa's JPY Account",
+    "currency": "JPY",
+    "balance": 8000000
+  },
+  {
+    "id": 13,
+    "ownerId": 13,
+    "name": "James's USD Account",
+    "currency": "USD",
+    "balance": 200000
+  },
+  {
+    "id": 14,
+    "ownerId": 14,
+    "name": "Kim's EUR Account",
+    "currency": "EUR",
+    "balance": 700000
+  },
+  {
+    "id": 15,
+    "ownerId": 15,
+    "name": "Joe's GBP Account",
+    "currency": "GBP",
+    "balance": 400000
+  },
+  {
+    "id": 16,
+    "ownerId": 16,
+    "name": "Melissa's JPY Account",
+    "currency": "JPY",
+    "balance": 15000000
+  },
+  {
+    "id": 17,
+    "ownerId": 17,
+    "name": "Rob's USD Account",
+    "currency": "USD",
+    "balance": 800000
+  },
+  {
+    "id": 18,
+    "ownerId": 18,
+    "name": "Megan's EUR Account",
+    "currency": "EUR",
+    "balance": 900000
+  },
+  {
+    "id": 19,
+    "ownerId": 19,
+    "name": "Will's GBP Account",
+    "currency": "GBP",
+    "balance": 300000
+  },
+  {
+    "id": 20,
+    "ownerId": 20,
+    "name": "Ashley's JPY Account",
+    "currency": "JPY",
+    "balance": 7000000
+  },
+  {
+    "id": 21,
+    "ownerId": 21,
+    "name": "Mark's USD Account",
+    "currency": "USD",
+    "balance": 950000
+  },
+  {
+    "id": 22,
+    "ownerId": 22,
+    "name": "Sam's EUR Account",
     "currency": "EUR",
     "balance": 500000
   },
   {
-    "id": 3,
-    "ownerId": 2,
-    "name": "current",
-    "currency": "USD",
-    "balance": 250000
+    "id": 23,
+    "ownerId": 23,
+    "name": "Brian's GBP Account",
+    "currency": "GBP",
+    "balance": 700000
   },
   {
-    "id": 4,
-    "ownerId": 2,
-    "name": "savings",
+    "id": 24,
+    "ownerId": 24,
+    "name": "Lauren's JPY Account",
+    "currency": "JPY",
+    "balance": 11000000
+  },
+  {
+    "id": 25,
+    "ownerId": 25,
+    "name": "Jason's USD Account",
     "currency": "USD",
+    "balance": 600000
+  },
+  {
+    "id": 26,
+    "ownerId": 26,
+    "name": "Christine's EUR Account",
+    "currency": "EUR",
+    "balance": 800000
+  },
+  {
+    "id": 27,
+    "ownerId": 27,
+    "name": "Alex's GBP Account",
+    "currency": "GBP",
+    "balance": 400000
+  },
+  {
+    "id": 28,
+    "ownerId": 28,
+    "name": "Vicky's JPY Account",
+    "currency": "JPY",
+    "balance": 9000000
+  },
+  {
+    "id": 29,
+    "ownerId": 29,
+    "name": "Kevin's USD Account",
+    "currency": "USD",
+    "balance": 350000
+  },
+  {
+    "id": 30,
+    "ownerId": 30,
+    "name": "Michelle's EUR Account",
+    "currency": "EUR",
     "balance": 1000000
+  },
+  {
+    "id": 31,
+    "ownerId": 1,
+    "name": "John's GBP Account",
+    "currency": "GBP",
+    "balance": 200000
+  },
+  {
+    "id": 32,
+    "ownerId": 2,
+    "name": "Emily's JPY Account",
+    "currency": "JPY",
+    "balance": 6000000
+  },
+  {
+    "id": 33,
+    "ownerId": 3,
+    "name": "Michael's USD Account",
+    "currency": "USD",
+    "balance": 700000
+  },
+  {
+    "id": 34,
+    "ownerId": 4,
+    "name": "Sarah's EUR Account",
+    "currency": "EUR",
+    "balance": 850000
+  },
+  {
+    "id": 35,
+    "ownerId": 5,
+    "name": "Chris's GBP Account",
+    "currency": "GBP",
+    "balance": 100000
+  },
+  {
+    "id": 36,
+    "ownerId": 6,
+    "name": "Jessica's JPY Account",
+    "currency": "JPY",
+    "balance": 3000000
+  },
+  {
+    "id": 37,
+    "ownerId": 7,
+    "name": "David's USD Account",
+    "currency": "USD",
+    "balance": 500000
+  },
+  {
+    "id": 38,
+    "ownerId": 8,
+    "name": "Jennifer's EUR Account",
+    "currency": "EUR",
+    "balance": 950000
+  },
+  {
+    "id": 39,
+    "ownerId": 9,
+    "name": "Matt's GBP Account",
+    "currency": "GBP",
+    "balance": 800000
+  },
+  {
+    "id": 40,
+    "ownerId": 10,
+    "name": "Amanda's JPY Account",
+    "currency": "JPY",
+    "balance": 5000000
+  },
+  {
+    "id": 41,
+    "ownerId": 11,
+    "name": "Dan's USD Account",
+    "currency": "USD",
+    "balance": 150000
+  },
+  {
+    "id": 42,
+    "ownerId": 12,
+    "name": "Lisa's EUR Account",
+    "currency": "EUR",
+    "balance": 600000
+  },
+  {
+    "id": 43,
+    "ownerId": 13,
+    "name": "James's GBP Account",
+    "currency": "GBP",
+    "balance": 400000
+  },
+  {
+    "id": 44,
+    "ownerId": 14,
+    "name": "Kim's JPY Account",
+    "currency": "JPY",
+    "balance": 11000000
+  },
+  {
+    "id": 45,
+    "ownerId": 15,
+    "name": "Joe's USD Account",
+    "currency": "USD",
+    "balance": 850000
+  },
+  {
+    "id": 46,
+    "ownerId": 16,
+    "name": "Melissa's EUR Account",
+    "currency": "EUR",
+    "balance": 900000
+  },
+  {
+    "id": 47,
+    "ownerId": 17,
+    "name": "Rob's GBP Account",
+    "currency": "GBP",
+    "balance": 300000
+  },
+  {
+    "id": 48,
+    "ownerId": 18,
+    "name": "Megan's JPY Account",
+    "currency": "JPY",
+    "balance": 7000000
+  },
+  {
+    "id": 49,
+    "ownerId": 19,
+    "name": "Will's USD Account",
+    "currency": "USD",
+    "balance": 950000
+  },
+  {
+    "id": 50,
+    "ownerId": 20,
+    "name": "Ashley's EUR Account",
+    "currency": "EUR",
+    "balance": 500000
   }
 ]
