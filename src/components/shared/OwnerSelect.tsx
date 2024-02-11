@@ -1,7 +1,8 @@
 import { useSearchOwnersQuery } from "@/hooks/useSearchOwnersQuery";
 import { AccountFormDTO } from "@/schemas/account";
 import { Owner } from "@/types/owner";
-import { FC } from "react";
+import { debounce } from "@mui/material";
+import { FC, useState } from "react";
 import { Control } from "react-hook-form";
 import ControlledSelect from "../UI/form/ControlledSelect";
 
@@ -11,7 +12,9 @@ type OwnerSelectorProps = {
 };
 
 const OwnerSelect: FC<OwnerSelectorProps> = ({ defaultOwner, control }) => {
-  const { data } = useSearchOwnersQuery();
+  const [q, setQ] = useState("");
+
+  const { data } = useSearchOwnersQuery(q);
 
   return (
     <ControlledSelect
@@ -20,6 +23,7 @@ const OwnerSelect: FC<OwnerSelectorProps> = ({ defaultOwner, control }) => {
       name="ownerId"
       label="Account Owner"
       options={data || []}
+      onSearch={debounce(setQ, 300)}
       object={{
         optionKey: "id",
         optionLabel: "name",

@@ -16,6 +16,7 @@ type ControlledSelectProps<
   name: Path<TFieldValues>;
   label: string;
   options: UseAutocompleteProps<TValue, boolean, boolean, boolean>["options"];
+  onSearch?: (q: string) => void;
   clearable?: boolean;
   // Select can work on objects, so we need to specify the key and label
   object?: { optionKey: keyof TValue; optionLabel: keyof TValue };
@@ -30,6 +31,7 @@ const ControlledSelect = <
   name,
   label,
   options,
+  onSearch,
   clearable = false,
   object,
 }: ControlledSelectProps<TValue, TFieldValues>) => {
@@ -42,14 +44,17 @@ const ControlledSelect = <
         <Autocomplete
           id={`${name}-select`}
           value={optionKey ? value?.[optionKey] : value}
-          onChange={(_, newValue) =>
-            onChange(optionKey ? newValue?.[optionKey] : newValue)
-          }
+          onChange={(_, newValue) => {
+            onChange(optionKey ? newValue?.[optionKey] : newValue);
+            if (!newValue && onSearch) {
+              onSearch("");
+            }
+          }}
           options={options}
           getOptionLabel={(option) =>
             optionKey
               ? optionLabel
-                ? option[optionLabel]
+                ? `${option[optionLabel]} (ID: ${option[optionKey]})`
                 : option[optionKey]
               : option
           }
@@ -63,6 +68,11 @@ const ControlledSelect = <
               inputProps={{
                 ...params.inputProps,
                 autoComplete: "off", // disable autocomplete and autofill
+              }}
+              onChange={(e) => {
+                if (onSearch) {
+                  onSearch(e.target.value);
+                }
               }}
             />
           )}

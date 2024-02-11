@@ -1,8 +1,8 @@
 import { searchOwners } from "@/services/api/owner/searchOwners";
 import { useQuery } from "@tanstack/react-query";
 
-export const useSearchOwnersQuery = () =>
+export const useSearchOwnersQuery = (q?: string) =>
   useQuery({
-    queryKey: ["owners"],
-    queryFn: searchOwners,
+    queryKey: ["owners", { q }],
+    queryFn: async () => searchOwners(q),
   });
