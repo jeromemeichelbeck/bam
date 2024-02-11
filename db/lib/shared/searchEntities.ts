@@ -9,9 +9,12 @@ export type SearchOptions<T extends Record<string, unknown>> = Partial<
   skip?: number;
   sortBy?: keyof T;
   sortOrder?: SortOrder;
+  q: string;
 };
 
-export const searchEntities = <T extends Record<string, unknown>>(
+export const searchEntities = <
+  T extends Record<string, string | number | boolean>,
+>(
   entities: T[],
   searchOptions: SearchOptions<T>,
 ): T[] => {
@@ -20,13 +23,27 @@ export const searchEntities = <T extends Record<string, unknown>>(
     skip = DEFAULT_SKIP,
     sortBy,
     sortOrder,
+    q,
     ...query
   } = searchOptions;
 
-  const filteredEntities = entities.filter((entity) => {
-    // Filter
+  let filteredEntities = entities;
+
+  // Search by q parameter
+  if (q) {
+    const search = q.toLowerCase();
+
+    filteredEntities = entities.filter((entity) => {
+      return Object.values(entity).some((value) => {
+        return value.toString().toLowerCase().includes(search);
+      });
+    });
+  }
+
+  // Filter by each exact query parameter
+  filteredEntities = filteredEntities.filter((entity) => {
     return Object.entries(query).every(([key, value]) => {
-      // Do not search this key
+      // Do not search this key if its value is undefined
       if (typeof value === "undefined") {
         return true;
       }
@@ -35,10 +52,7 @@ export const searchEntities = <T extends Record<string, unknown>>(
       if (Array.isArray(value)) {
         return value.includes(entity[key]);
       }
-
-      // Loose equality to check number against string
-      // We would not do that an a real production API
-      return entity[key] == value;
+      return entity[key].toString() == value.toString();
     });
   });
 
