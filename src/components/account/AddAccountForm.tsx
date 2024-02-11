@@ -1,5 +1,6 @@
 import { useAddAccountForm } from "@/hooks/useAddAccountForm";
-import { Button, Stack, TextField } from "@mui/material";
+import { Alert, Button, Grid, Stack, TextField } from "@mui/material";
+import Link from "next/link";
 import { FC } from "react";
 import CurrencySelect from "../shared/CurrencySelect";
 import OwnerSelect from "../shared/OwnerSelect";
@@ -31,9 +32,24 @@ const AddAccountForm: FC<AddAccountFormProps> = () => {
           helperText={errors.balance?.message}
           fullWidth
         />
-        <Button type="submit" disabled={isPending}>
-          Add Account
-        </Button>
+        {errors?.root?.message && (
+          <Alert severity="error">{errors.root.message}</Alert>
+        )}
+        <Grid container gap={2} justifyContent="flex-end">
+          <Link href="/" passHref>
+            <Button variant="outlined" color="primary">
+              Cancel
+            </Button>
+          </Link>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={isPending}
+          >
+            Create Account
+          </Button>
+        </Grid>
       </Stack>
     </form>
   );

@@ -7,7 +7,7 @@ type AccountContainerProps = {};
 
 const AccountContainer: FC<AccountContainerProps> = () => {
   return (
-    <Stack gap={2}>
+    <Stack gap={2} alignItems="flex-end">
       <AccountList />
       <AddAccountButton />
     </Stack>

@@ -1,7 +1,7 @@
+import { fetchJson } from "@/services/api/fetchJson";
 import { Account } from "@/types/account";
 
 export const searchAccounts = async () => {
-  const response = await fetch("/api/accounts");
-  const data = await response.json();
+  const data = await fetchJson("/api/accounts");
   return data as Account[];
 };
