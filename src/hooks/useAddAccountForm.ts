@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export const useAddAccountForm = () => {
   const queryClient = useQueryClient();
@@ -23,6 +24,8 @@ export const useAddAccountForm = () => {
     mutationFn: addAccount,
     // throwOnError: false,
     onSuccess: () => {
+      // Notify the user that the account was added
+      toast.success("Account added successfully");
       // Invalidate the query to ensure we get the new data from the server
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
       // Redirect to the accounts page

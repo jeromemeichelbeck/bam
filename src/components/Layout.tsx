@@ -1,5 +1,7 @@
 import { Container, Stack } from "@mui/material";
 import { FC } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Footer from "./Footer";
 import Header from "./Header";
 
@@ -12,6 +14,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
     <Stack minHeight="100vh">
       <Header />
       <Container sx={{ flex: 1 }}>{children}</Container>
+      <ToastContainer />
       <Footer />
     </Stack>
   );
