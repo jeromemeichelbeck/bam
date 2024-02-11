@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Container, Stack } from "@mui/material";
 import { FC } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -11,7 +11,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <Stack minHeight="100vh">
       <Header />
-      <Box flex={1}>{children}</Box>
+      <Container sx={{ flex: 1 }}>{children}</Container>
       <Footer />
     </Stack>
   );

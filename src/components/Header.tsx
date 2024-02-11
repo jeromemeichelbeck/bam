@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { FC } from "react";
 
 type HeaderProps = {};
@@ -6,7 +6,9 @@ type HeaderProps = {};
 const Header: FC<HeaderProps> = () => {
   return (
     <header>
-      <Typography variant="h1">Bank Account Manager</Typography>
+      <Container>
+        <Typography variant="h1">Bank Account Manager</Typography>
+      </Container>
     </header>
   );
 };

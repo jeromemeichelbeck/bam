@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { FC } from "react";
 
 type FooterProps = {};
@@ -6,11 +6,11 @@ type FooterProps = {};
 const Footer: FC<FooterProps> = () => {
   return (
     <footer>
-      <Box py={2} display="flex" justifyContent="center">
+      <Container sx={{ display: "flex", justifyContent: "center", py: 2 }}>
         <Typography variant="caption" textAlign="center">
           © 2021 Bank Account Manager
         </Typography>
-      </Box>
+      </Container>
     </footer>
   );
 };
