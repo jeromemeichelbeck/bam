@@ -1,8 +1,11 @@
 import { useSearchAccountsQuery } from "@/hooks/useSearchAccountsQuery";
 import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import {
+  Grid,
+  MenuItem,
   Pagination,
   Paper,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -16,7 +19,7 @@ type AccountListProps = {};
 
 const AccountList: FC<AccountListProps> = () => {
   const [page, setPage] = useState(1);
-  const size = 10;
+  const [size, setSize] = useState(10);
   let pages = 1;
 
   const { data: accounts, isLoading: isAccountsLoading } =
@@ -54,13 +57,23 @@ const AccountList: FC<AccountListProps> = () => {
           )}
         </TableBody>
       </Table>
-      <Pagination
-        count={pages}
-        page={page}
-        onChange={(_, value) => setPage(value)}
-        color="primary"
-        sx={{ py: 2 }}
-      />
+      <Grid container justifyContent="space-between" alignItems="center">
+        <Pagination
+          count={pages}
+          page={page}
+          onChange={(_, value) => setPage(value)}
+          color="primary"
+          sx={{ py: 2 }}
+        />
+        <Select
+          value={size}
+          onChange={(e) => setSize(parseInt(e.target.value.toString()))}
+        >
+          <MenuItem value={10}>10</MenuItem>
+          <MenuItem value={20}>20</MenuItem>
+          <MenuItem value={50}>50</MenuItem>
+        </Select>
+      </Grid>
     </TableContainer>
   );
 };
