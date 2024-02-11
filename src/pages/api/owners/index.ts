@@ -1,11 +1,13 @@
+import { Maybe } from "@/types/api-error";
 import { Owner } from "@/types/owner";
+import { Paginated } from "@/types/pagintaion";
 import { NextApiRequest, NextApiResponse } from "next";
 import { searchOwners } from "../../../../db/lib/owners/searchOwners";
 import { getSearchOptionsFromQuery } from "../../../../db/lib/shared/getSearchOptionsFromQuery";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse<Maybe<Paginated<Owner>>>,
 ) {
   switch (req.method) {
     case "GET":

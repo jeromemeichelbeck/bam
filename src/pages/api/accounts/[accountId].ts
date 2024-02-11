@@ -61,8 +61,8 @@ export default async function handler(
         });
         if (
           existingAccountWithSameName &&
-          existingAccountWithSameName.length > 0 &&
-          existingAccountWithSameName[0].id !== accountId
+          existingAccountWithSameName.count > 0 &&
+          existingAccountWithSameName.data[0].id !== accountId
         ) {
           return res.status(409).json({
             code: "CONFLICT",

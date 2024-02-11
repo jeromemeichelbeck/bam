@@ -1,4 +1,5 @@
 import { DEFAULT_LIMIT, DEFAULT_SKIP } from "@/constants/pagination";
+import { Paginated } from "@/types/pagintaion";
 
 export type SortOrder = "asc" | "desc";
 
@@ -9,7 +10,7 @@ export type SearchOptions<T extends Record<string, unknown>> = Partial<
   skip?: number;
   sortBy?: keyof T;
   sortOrder?: SortOrder;
-  q: string;
+  q?: string;
 };
 
 export const searchEntities = <
@@ -17,7 +18,7 @@ export const searchEntities = <
 >(
   entities: T[],
   searchOptions: SearchOptions<T>,
-): T[] => {
+): Paginated<T> => {
   const {
     limit = DEFAULT_LIMIT,
     skip = DEFAULT_SKIP,
@@ -67,5 +68,7 @@ export const searchEntities = <
     });
   }
 
-  return filteredEntities.slice(skip, skip + limit);
+  const count = filteredEntities.length;
+
+  return { count, data: filteredEntities.slice(skip, skip + limit) };
 };

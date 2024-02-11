@@ -1,6 +1,7 @@
 import { useSearchAccountsQuery } from "@/hooks/useSearchAccountsQuery";
 import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import {
+  Pagination,
   Paper,
   Table,
   TableBody,
@@ -45,6 +46,7 @@ const AccountList: FC<AccountListProps> = () => {
           )}
         </TableBody>
       </Table>
+      <Pagination count={10} color="primary" sx={{ py: 2 }} />
     </TableContainer>
   );
 };

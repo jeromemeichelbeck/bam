@@ -1,5 +1,6 @@
 import { Account } from "@/types/account";
 import { Maybe } from "@/types/api-error";
+import { Paginated } from "@/types/pagintaion";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { addAccount } from "../../../../db/lib/accounts/addAccount";
 import { searchAccounts } from "../../../../db/lib/accounts/searchAccounts";
@@ -7,7 +8,7 @@ import { getSearchOptionsFromQuery } from "../../../../db/lib/shared/getSearchOp
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Maybe<Account[] | Account>>,
+  res: NextApiResponse<Maybe<Paginated<Account> | Account>>,
 ) {
   switch (req.method) {
     case "GET":
@@ -27,7 +28,7 @@ export default async function handler(
 
       // Search for an account with the same name and owner
       const existingAccount = await searchAccounts({ ownerId, name });
-      if (existingAccount && existingAccount.length > 0) {
+      if (existingAccount && existingAccount.count > 0) {
         return res.status(409).json({
           code: "CONFLICT",
           message: `An account with the name '${name}' already exists for owner with id '${ownerId}'`,
