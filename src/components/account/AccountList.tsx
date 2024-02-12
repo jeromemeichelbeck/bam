@@ -1,6 +1,7 @@
 import { useSearchAccountsQuery } from "@/hooks/useSearchAccountsQuery";
 import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import {
+  Alert,
   Grid,
   MenuItem,
   Pagination,
@@ -22,8 +23,11 @@ const AccountList: FC<AccountListProps> = () => {
   const [size, setSize] = useState(10);
   let pages = 1;
 
-  const { data: accounts, isLoading: isAccountsLoading } =
-    useSearchAccountsQuery(page, size);
+  const {
+    data: accounts,
+    isLoading: isAccountsLoading,
+    error,
+  } = useSearchAccountsQuery(page, size);
 
   if (accounts) {
     pages = Math.ceil(accounts.count / size);
@@ -31,6 +35,7 @@ const AccountList: FC<AccountListProps> = () => {
 
   return (
     <TableContainer component={Paper}>
+      {error && <Alert severity="error">{error.message}</Alert>}
       <Table aria-label="Accounts list">
         <TableHead>
           <TableRow>
@@ -40,12 +45,12 @@ const AccountList: FC<AccountListProps> = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {isAccountsLoading || !Array.isArray(accounts?.data) ? (
+          {isAccountsLoading && !error ? (
             <TableRow>
               <TableCell colSpan={3}>Loading...</TableCell>
             </TableRow>
           ) : (
-            accounts.data.map((account) => (
+            (accounts?.data || []).map((account) => (
               <TableRow key={account.id}>
                 <TableCell>{account.ownerId}</TableCell>
                 <TableCell>{account.name}</TableCell>
