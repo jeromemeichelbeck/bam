@@ -1,19 +1,17 @@
+import { usePagination } from "@/hooks/usePagination";
 import { TableCell, TableRow, useTheme } from "@mui/material";
 import { FC } from "react";
 import Skeleton from "react-loading-skeleton";
 
 type LoadingTableRowsProps = {
-  rows?: number;
   cols?: number;
 };
 
-const LoadingTableRows: FC<LoadingTableRowsProps> = ({
-  rows = 1,
-  cols = 1,
-}) => {
+const LoadingTableRows: FC<LoadingTableRowsProps> = ({ cols = 1 }) => {
   const theme = useTheme();
+  const { size } = usePagination();
 
-  return Array.from({ length: rows }, (_, rowNbr) => (
+  return Array.from({ length: size }, (_, rowNbr) => (
     <TableRow key={rowNbr}>
       {Array.from({ length: cols }, (_, colNbr) => (
         <TableCell key={colNbr}>

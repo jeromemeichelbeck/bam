@@ -1,13 +1,8 @@
-import { usePagination } from "@/hooks/usePagination";
 import { useSearchAccountsQuery } from "@/hooks/useSearchAccountsQuery";
 import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import {
   Alert,
-  Grid,
-  MenuItem,
-  Pagination,
   Paper,
-  Select,
   Table,
   TableBody,
   TableCell,
@@ -16,24 +11,17 @@ import {
   TableRow,
 } from "@mui/material";
 import { FC } from "react";
-import LoadingTableRows from "../shared/LoadingTableRows";
+import ListPagination from "../UI/list/ListPagination";
+import LoadingTableRows from "../UI/list/LoadingTableRows";
 
 type AccountListProps = {};
 
 const AccountList: FC<AccountListProps> = () => {
-  let pages = 1;
-
-  const { page, size, setPaginationParams } = usePagination();
-
   const {
     data: accounts,
     isLoading: isAccountsLoading,
     error,
-  } = useSearchAccountsQuery(page, size);
-
-  if (accounts) {
-    pages = Math.ceil(accounts.count / size);
-  }
+  } = useSearchAccountsQuery();
 
   return (
     <TableContainer component={Paper}>
@@ -48,7 +36,7 @@ const AccountList: FC<AccountListProps> = () => {
         </TableHead>
         <TableBody>
           {isAccountsLoading && !error ? (
-            <LoadingTableRows rows={size} cols={3} />
+            <LoadingTableRows cols={3} />
           ) : (
             (accounts?.data || []).map((account) => (
               <TableRow key={account.id}>
@@ -62,27 +50,7 @@ const AccountList: FC<AccountListProps> = () => {
           )}
         </TableBody>
       </Table>
-      <Grid container justifyContent="space-between" alignItems="center">
-        <Pagination
-          count={pages}
-          page={page}
-          onChange={(_, value) =>
-            setPaginationParams({ page: value.toString() })
-          }
-          color="primary"
-          sx={{ py: 2 }}
-        />
-        <Select
-          value={size}
-          onChange={(e) =>
-            setPaginationParams({ size: e.target.value.toString() })
-          }
-        >
-          <MenuItem value={10}>10</MenuItem>
-          <MenuItem value={20}>20</MenuItem>
-          <MenuItem value={50}>50</MenuItem>
-        </Select>
-      </Grid>
+      <ListPagination total={accounts?.count} />
     </TableContainer>
   );
 };
