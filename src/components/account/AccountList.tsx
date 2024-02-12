@@ -11,6 +11,7 @@ import {
   TableRow,
   useTheme,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import { FC } from "react";
 import ListPagination from "../UI/list/ListPagination";
 import ListRow from "../UI/list/ListRow";
@@ -20,6 +21,7 @@ type AccountListProps = {};
 
 const AccountList: FC<AccountListProps> = () => {
   const theme = useTheme();
+  const router = useRouter();
 
   const {
     data: accounts,
@@ -50,7 +52,9 @@ const AccountList: FC<AccountListProps> = () => {
                   account.name,
                   getFormattedAmount(account.balance, account.currency),
                 ]}
-                onClick={() => console.log("click")}
+                onClick={() => {
+                  router.push(`/account/${account.id}`);
+                }}
                 bgcolor={
                   theme.palette.background[index % 2 ? "paper" : "default"]
                 }
