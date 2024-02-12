@@ -15,6 +15,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { FC, useState } from "react";
+import LoadingTableRows from "../shared/LoadingTableRows";
 
 type AccountListProps = {};
 
@@ -46,9 +47,7 @@ const AccountList: FC<AccountListProps> = () => {
         </TableHead>
         <TableBody>
           {isAccountsLoading && !error ? (
-            <TableRow>
-              <TableCell colSpan={3}>Loading...</TableCell>
-            </TableRow>
+            <LoadingTableRows rows={size} cols={3} />
           ) : (
             (accounts?.data || []).map((account) => (
               <TableRow key={account.id}>
