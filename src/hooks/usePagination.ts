@@ -1,5 +1,10 @@
-import { DEFAULT_PAGE, DEFAULT_SIZE } from "@/constants/pagination";
+import {
+  AVAILABLE_SIZES,
+  DEFAULT_PAGE,
+  DEFAULT_SIZE,
+} from "@/constants/pagination";
 import { PaginationQueryParams } from "@/types/pagintaion";
+import { getClosest } from "@/utils/helpers/getClosest";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
@@ -10,7 +15,9 @@ export const usePagination = () => {
   const router = useRouter();
 
   const page = parseInt(searchParams.get("page") || DEFAULT_PAGE);
-  const size = parseInt(searchParams.get("size") || DEFAULT_SIZE);
+  const size = parseInt(
+    getClosest(AVAILABLE_SIZES, searchParams.get("size")) || DEFAULT_SIZE,
+  );
 
   const setPaginationParams = useCallback(
     (queryParams: PaginationQueryParams) => {

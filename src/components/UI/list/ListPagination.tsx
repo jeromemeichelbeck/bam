@@ -1,5 +1,8 @@
+import { AVAILABLE_SIZES } from "@/constants/pagination";
 import { usePagination } from "@/hooks/usePagination";
 import {
+  FormControl,
+  FormHelperText,
   Grid,
   MenuItem,
   Pagination,
@@ -31,7 +34,7 @@ const ListPagination: FC<ListPaginationProps> = ({ total }) => {
   };
 
   return (
-    <Grid container justifyContent="space-between" alignItems="center">
+    <Grid container justifyContent="space-between" alignItems="center" py={2}>
       <Pagination
         count={pages}
         page={page}
@@ -39,11 +42,16 @@ const ListPagination: FC<ListPaginationProps> = ({ total }) => {
         color="primary"
         sx={{ py: 2 }}
       />
-      <Select value={size.toString()} onChange={onChangeSize}>
-        <MenuItem value={10}>10</MenuItem>
-        <MenuItem value={20}>20</MenuItem>
-        <MenuItem value={50}>50</MenuItem>
-      </Select>
+      <FormControl>
+        <FormHelperText>Results per page</FormHelperText>
+        <Select size="small" value={size.toString()} onChange={onChangeSize}>
+          {AVAILABLE_SIZES.map((size) => (
+            <MenuItem key={size} value={size}>
+              {size}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </Grid>
   );
 };
