@@ -9,14 +9,18 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  useTheme,
 } from "@mui/material";
 import { FC } from "react";
 import ListPagination from "../UI/list/ListPagination";
+import ListRow from "../UI/list/ListRow";
 import LoadingTableRows from "../UI/list/LoadingTableRows";
 
 type AccountListProps = {};
 
 const AccountList: FC<AccountListProps> = () => {
+  const theme = useTheme();
+
   const {
     data: accounts,
     isLoading: isAccountsLoading,
@@ -38,14 +42,19 @@ const AccountList: FC<AccountListProps> = () => {
           {isAccountsLoading && !error ? (
             <LoadingTableRows cols={3} />
           ) : (
-            (accounts?.data || []).map((account) => (
-              <TableRow key={account.id}>
-                <TableCell>{account.ownerId}</TableCell>
-                <TableCell>{account.name}</TableCell>
-                <TableCell>
-                  {getFormattedAmount(account.balance, account.currency)}
-                </TableCell>
-              </TableRow>
+            (accounts?.data || []).map((account, index) => (
+              <ListRow
+                key={index}
+                data={[
+                  account.id,
+                  account.name,
+                  getFormattedAmount(account.balance, account.currency),
+                ]}
+                onClick={() => console.log("click")}
+                bgcolor={
+                  theme.palette.background[index % 2 ? "paper" : "default"]
+                }
+              />
             ))
           )}
         </TableBody>
