@@ -1,5 +1,6 @@
 import { fetchJson } from "@/services/api/fetchJson";
 import { Owner } from "@/types/owner";
+import { Paginated } from "@/types/pagintaion";
 
 export const searchOwners = async (q?: string) => {
   let queryParamsString = "";
@@ -9,5 +10,5 @@ export const searchOwners = async (q?: string) => {
   }
 
   const data = await fetchJson(`/api/owners${queryParamsString}`);
-  return data as Owner[];
+  return data as Paginated<Owner>;
 };

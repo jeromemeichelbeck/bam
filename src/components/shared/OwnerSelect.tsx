@@ -14,7 +14,7 @@ type OwnerSelectorProps = {
 const OwnerSelect: FC<OwnerSelectorProps> = ({ defaultOwner, control }) => {
   const [q, setQ] = useState("");
 
-  const { data } = useSearchOwnersQuery(q);
+  const { data: owners } = useSearchOwnersQuery(q);
 
   return (
     <ControlledSelect
@@ -22,7 +22,7 @@ const OwnerSelect: FC<OwnerSelectorProps> = ({ defaultOwner, control }) => {
       control={control}
       name="ownerId"
       label="Account Owner"
-      options={data || []}
+      options={owners?.data || []}
       onSearch={debounce(setQ, 300)}
       object={{
         optionKey: "id",
