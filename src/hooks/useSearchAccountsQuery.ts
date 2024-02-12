@@ -1,4 +1,5 @@
 import { searchAccounts } from "@/services/api/account/searchAccounts";
+import { delayPromise } from "@/utils/helpers/delayPromise";
 import { useQuery } from "@tanstack/react-query";
 
 export const useSearchAccountsQuery = (page = 1, size = 10) => {
@@ -7,6 +8,6 @@ export const useSearchAccountsQuery = (page = 1, size = 10) => {
 
   return useQuery({
     queryKey: ["accounts", { page, size }],
-    queryFn: async () => searchAccounts(limit, skip),
+    queryFn: async () => delayPromise(searchAccounts(limit, skip)),
   });
 };
