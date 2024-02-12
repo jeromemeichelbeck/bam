@@ -1,5 +1,5 @@
+import { usePagination } from "@/hooks/usePagination";
 import { useSearchAccountsQuery } from "@/hooks/useSearchAccountsQuery";
-import { PaginationQueryParams } from "@/types/pagintaion";
 import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import {
   Alert,
@@ -15,36 +15,15 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
-import { FC, useCallback } from "react";
+import { FC } from "react";
 import LoadingTableRows from "../shared/LoadingTableRows";
 
 type AccountListProps = {};
 
 const AccountList: FC<AccountListProps> = () => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  const page = parseInt(searchParams.get("page") || "1");
-  const size = parseInt(searchParams.get("size") || "10");
-
-  const setQueryParams = useCallback(
-    (accountQueryParams: PaginationQueryParams) => {
-      const params = new URLSearchParams(searchParams.toString());
-      for (const [key, value] of Object.entries(accountQueryParams)) {
-        if (typeof value === "string") {
-          params.set(key, value);
-        }
-      }
-
-      router.push(`${pathname}?${params}`);
-    },
-    [router, pathname, searchParams],
-  );
-
   let pages = 1;
+
+  const { page, size, setPaginationParams } = usePagination();
 
   const {
     data: accounts,
@@ -87,13 +66,17 @@ const AccountList: FC<AccountListProps> = () => {
         <Pagination
           count={pages}
           page={page}
-          onChange={(_, value) => setQueryParams({ page: value.toString() })}
+          onChange={(_, value) =>
+            setPaginationParams({ page: value.toString() })
+          }
           color="primary"
           sx={{ py: 2 }}
         />
         <Select
           value={size}
-          onChange={(e) => setQueryParams({ size: e.target.value.toString() })}
+          onChange={(e) =>
+            setPaginationParams({ size: e.target.value.toString() })
+          }
         >
           <MenuItem value={10}>10</MenuItem>
           <MenuItem value={20}>20</MenuItem>
