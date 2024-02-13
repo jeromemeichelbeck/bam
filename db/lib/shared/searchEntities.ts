@@ -53,7 +53,7 @@ export const searchEntities = <
       if (Array.isArray(value)) {
         return value.includes(entity[key]);
       }
-      return entity[key].toString() == value.toString();
+      return entity[key].toString() === value.toString();
     });
   });
 

@@ -23,7 +23,7 @@ export default async function handler(
         });
       }
     case "POST":
-      // We do not vzlidzte input here, as it is not the scope of the project
+      // We do not validate input here, as it is not the scope of the project
       const { ownerId, name, currency, balance } = req.body;
 
       // Search for an account with the same name and owner
