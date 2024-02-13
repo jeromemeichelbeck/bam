@@ -8,10 +8,13 @@ export const searchTransferts = async (
   skip = 0,
 ) => {
   const queryParams = new URLSearchParams({
-    accountId: String(accountId),
     limit: String(limit),
     skip: String(skip),
   });
+  if (accountId) {
+    queryParams.set("accountId", String(accountId));
+  }
+
   const queryParamsString = queryParams.toString();
   const data = await fetchJson(`/api/transferts?${queryParamsString}`);
   return data as Paginated<Transfert>;
