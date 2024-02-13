@@ -1,9 +1,10 @@
+import AccountDetails from "@/components/account/AccountDetails";
 import { useRouter } from "next/router";
 
-export default function AccountDetails() {
+export default function AccountDetailsPage() {
   const router = useRouter();
 
   const accountId = parseInt(router.query.accountId as string);
 
-  return <h1>Account details {accountId}</h1>;
+  return <AccountDetails accountId={accountId} />;
 }
