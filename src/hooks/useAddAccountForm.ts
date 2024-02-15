@@ -20,7 +20,7 @@ export const useAddAccountForm = () => {
     resolver: zodResolver(accountFormSchema),
   });
 
-  const { mutate, isPending, error } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: addAccount,
     // throwOnError: false,
     onSuccess: () => {

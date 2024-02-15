@@ -12,46 +12,44 @@ const AddAccountForm: FC<AddAccountFormProps> = () => {
     useAddAccountForm();
 
   return (
-    <form onSubmit={handleAddAccount}>
-      <Stack gap={2}>
-        <OwnerSelect control={control} />
-        <TextField
-          {...register("name")}
-          type="text"
-          label="Account Name"
-          error={!!errors.name}
-          helperText={errors.name?.message}
-          fullWidth
-        />
-        <CurrencySelect control={control} />
-        <TextField
-          {...register("balance")}
-          type="number"
-          label="Account Initial Balance"
-          error={!!errors.balance}
-          helperText={errors.balance?.message}
-          fullWidth
-        />
-        {errors?.root?.message && (
-          <Alert severity="error">{errors.root.message}</Alert>
-        )}
-        <Grid container gap={2} justifyContent="flex-end">
-          <Link href="/" passHref>
-            <Button variant="outlined" color="primary">
-              Cancel
-            </Button>
-          </Link>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={isPending}
-          >
-            Create Account
+    <Stack component="form" onSubmit={handleAddAccount} gap={2}>
+      <OwnerSelect control={control} />
+      <TextField
+        {...register("name")}
+        type="text"
+        label="Account Name"
+        error={!!errors.name}
+        helperText={errors.name?.message}
+        fullWidth
+      />
+      <CurrencySelect control={control} />
+      <TextField
+        {...register("balance")}
+        type="number"
+        label="Account Initial Balance"
+        error={!!errors.balance}
+        helperText={errors.balance?.message}
+        fullWidth
+      />
+      {errors?.root?.message && (
+        <Alert severity="error">{errors.root.message}</Alert>
+      )}
+      <Grid container gap={2} justifyContent="flex-end">
+        <Link href="/" passHref>
+          <Button variant="outlined" color="primary">
+            Cancel
           </Button>
-        </Grid>
-      </Stack>
-    </form>
+        </Link>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          disabled={isPending}
+        >
+          Create Account
+        </Button>
+      </Grid>
+    </Stack>
   );
 };
 
