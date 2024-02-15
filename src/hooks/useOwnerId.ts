@@ -19,7 +19,7 @@ export const useOwnerId = () => {
   );
 
   return {
-    ownerId: isNaN(ownerId) ? undefined : ownerId,
+    ownerId: isNaN(ownerId) || !ownerId ? undefined : ownerId,
     setOwnerId,
   };
 };

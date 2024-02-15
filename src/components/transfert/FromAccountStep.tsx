@@ -1,21 +1,12 @@
-import { TransfertFormDTO } from "@/schemas/transfert";
 import { Typography } from "@mui/material";
 import { FC, useEffect } from "react";
-import { Control } from "react-hook-form";
 import AccountSelect from "../shared/AccountSelect";
 import OwnerSelect from "../shared/OwnerSelect";
+import { StepProps } from "./TransfertStepper";
 
-type FromAccountStepProps = {
-  values: TransfertFormDTO;
-  resetFromAccountId: () => void;
-  resetToAccountId: () => void;
-  control: Control<TransfertFormDTO>;
-};
-
-const FromAccountStep: FC<FromAccountStepProps> = ({
+const FromAccountStep: FC<StepProps> = ({
   values,
   resetFromAccountId,
-  resetToAccountId,
   control,
 }) => {
   // Unselect the account when the owner is changed

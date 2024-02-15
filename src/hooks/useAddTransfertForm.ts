@@ -5,6 +5,7 @@ import { Owner } from "@/types/owner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -33,13 +34,15 @@ export const useAddTransfertForm = (
     resolver: zodResolver(transfertFormSchema),
   });
 
-  if (ownerId) {
-    setValue("fromOwnerId", ownerId);
-  }
-
-  if (accountId) {
-    setValue("fromAccountId", accountId);
-  }
+  // Change default values when ownerId or accountId are provided
+  useEffect(() => {
+    if (ownerId) {
+      setValue("fromOwnerId", ownerId);
+    }
+    if (accountId) {
+      setValue("fromAccountId", accountId);
+    }
+  }, [ownerId, accountId, setValue]);
 
   const { mutate, ...mutation } = useMutation({
     mutationFn: addTransfert,

@@ -19,6 +19,13 @@ const steps = [
   { label: "Enter amount", component: AmountStep },
 ];
 
+export type StepProps = {
+  values: TransfertFormDTO;
+  resetFromAccountId: () => void;
+  resetToAccountId: () => void;
+  control: Control<TransfertFormDTO>;
+};
+
 type TransfertStepperProps = {
   values: TransfertFormDTO;
   resetFromAccountId: () => void;

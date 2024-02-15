@@ -19,7 +19,7 @@ export const useAccountId = () => {
   );
 
   return {
-    accountId: isNaN(accountId) ? undefined : accountId,
+    accountId: isNaN(accountId) || !accountId ? undefined : accountId,
     setAccountId,
   };
 };
