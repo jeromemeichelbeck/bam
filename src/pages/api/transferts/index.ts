@@ -18,24 +18,21 @@ export default async function handler(
         return res.status(200).json(transferts);
       } catch (error) {}
     case "POST":
-      const { date, fromAccountId, toAccountId, amount, rate, description } =
-        req.body;
+      const { fromAccountId, toAccountId, amount, description } = req.body;
 
-      // Create the transfert (WIP)
+      // Create the transfert
       try {
         const newTransfert = await addTransfert({
-          date,
           fromAccountId,
           toAccountId,
           amount,
-          rate,
           description,
         });
         return res.status(201).json(newTransfert);
       } catch (error) {
         return res.status(500).json({
           code: "INTERNAL_SERVER_ERROR",
-          message: "An error occurred while creating the accounts",
+          message: "An error occurred while creating the transfert",
         });
       }
 
