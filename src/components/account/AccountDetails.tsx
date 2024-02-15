@@ -4,6 +4,7 @@ import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import { Paper, Stack, Typography, useTheme } from "@mui/material";
 import { FC } from "react";
 import Skeleton from "react-loading-skeleton";
+import AddTransfertButton from "../transfert/AddTransfertButton";
 import TransfertList from "../transfert/TransfertList";
 
 type AccountDetailsProps = {
@@ -32,6 +33,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({ accountId }) => {
           )}
         </Typography>
       </Stack>
+      <AddTransfertButton ownerId={account?.ownerId} accountId={accountId} />
       <TransfertList accountId={accountId} />
     </Paper>
   );
