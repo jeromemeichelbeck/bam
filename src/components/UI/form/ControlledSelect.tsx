@@ -43,9 +43,9 @@ const ControlledSelect = <
       render={({ field: { value, onChange } }) => (
         <Autocomplete
           id={`${name}-select`}
-          value={optionKey ? value?.[optionKey] : value}
+          value={options.find(({ id }) => id === value) ?? null}
           onChange={(_, newValue) => {
-            onChange(optionKey ? newValue?.[optionKey] : newValue);
+            onChange((optionKey ? newValue?.[optionKey] : newValue) ?? null);
             if (!newValue && onSearch) {
               onSearch("");
             }
