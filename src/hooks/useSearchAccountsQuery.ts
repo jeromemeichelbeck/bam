@@ -10,6 +10,6 @@ export const useSearchAccountsQuery = () => {
 
   return useQuery({
     queryKey: ["accounts", { page, size }],
-    queryFn: async () => delayPromise(searchAccounts(limit, skip)),
+    queryFn: async () => delayPromise(searchAccounts({ limit, skip })),
   });
 };

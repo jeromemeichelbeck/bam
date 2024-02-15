@@ -2,7 +2,7 @@ import { fetchJson } from "@/services/api/fetchJson";
 import { Owner } from "@/types/owner";
 import { Paginated } from "@/types/pagintaion";
 
-export const searchOwners = async (q?: string) => {
+export const searchOwners = async ({ q = "" }) => {
   let queryParamsString = "";
   if (q) {
     const queryParams = new URLSearchParams({ q });

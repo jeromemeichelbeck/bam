@@ -1,3 +1,4 @@
+import { Owner } from "@/types/owner";
 import { z } from "zod";
 
 export const transfertFormSchema = z.object({
@@ -13,4 +14,7 @@ export const transfertFormSchema = z.object({
   description: z.string(),
 });
 
-export type TransfertFormDTO = z.infer<typeof transfertFormSchema>;
+export type TransfertFormDTO = z.infer<typeof transfertFormSchema> & {
+  fromOwnerId: Owner["id"];
+  toOwnerId: Owner["id"];
+};

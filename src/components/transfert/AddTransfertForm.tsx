@@ -1,7 +1,7 @@
 import { useAddTransfertForm } from "@/hooks/useAddTransfertForm";
 import { Stack, Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { z } from "zod";
 import TransfertStepper from "./TransfertStepper";
 
@@ -15,13 +15,26 @@ const AddTransfertForm: FC<AddTransfertFormProps> = () => {
     .safeParse(searchParams.get("accountId"));
   const accountId = parsedAccountId.success ? parsedAccountId.data : undefined;
 
-  const { isPending, control, register, handleAddTransfert } =
+  const { control, handleAddTransfert, watch, resetField } =
     useAddTransfertForm(accountId);
+
+  const resetFromAccountId = useCallback(() => {
+    resetField("fromAccountId");
+  }, [resetField]);
+
+  const resetToAccountId = useCallback(() => {
+    resetField("toAccountId");
+  }, [resetField]);
 
   return (
     <Stack component="form" onSubmit={handleAddTransfert} gap={2}>
       <Typography variant="h4">Make a fund transfert transfert</Typography>
-      <TransfertStepper />
+      <TransfertStepper
+        control={control}
+        values={watch()}
+        resetFromAccountId={resetFromAccountId}
+        resetToAccountId={resetToAccountId}
+      />
     </Stack>
   );
 };

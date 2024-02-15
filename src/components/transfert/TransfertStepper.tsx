@@ -1,3 +1,4 @@
+import { TransfertFormDTO } from "@/schemas/transfert";
 import {
   Box,
   Button,
@@ -7,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { FC, useState } from "react";
+import { Control } from "react-hook-form";
 import AmountStep from "./AmountStep";
 import FromAccountStep from "./FromAccountStep";
 import ToAccountStep from "./ToAccountStep";
@@ -17,9 +19,19 @@ const steps = [
   { label: "Enter amount", component: AmountStep },
 ];
 
-type TransfertStepperProps = {};
+type TransfertStepperProps = {
+  values: TransfertFormDTO;
+  resetFromAccountId: () => void;
+  resetToAccountId: () => void;
+  control: Control<TransfertFormDTO>;
+};
 
-const TransfertStepper: FC<TransfertStepperProps> = () => {
+const TransfertStepper: FC<TransfertStepperProps> = ({
+  values,
+  resetFromAccountId,
+  resetToAccountId,
+  control,
+}) => {
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -57,7 +69,12 @@ const TransfertStepper: FC<TransfertStepperProps> = () => {
         </>
       ) : (
         <>
-          {steps[activeStep].component({})}
+          {steps[activeStep].component({
+            control,
+            values,
+            resetFromAccountId,
+            resetToAccountId,
+          })}
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"

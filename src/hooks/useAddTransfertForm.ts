@@ -1,27 +1,47 @@
 import { TransfertFormDTO, transfertFormSchema } from "@/schemas/transfert";
 import { addTransfert } from "@/services/api/transferts/addTransfert";
 import { Account } from "@/types/account";
+import { Owner } from "@/types/owner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-export const useAddTransfertForm = (accountId?: Account["id"]) => {
+export const useAddTransfertForm = (
+  ownerId?: Owner["id"],
+  accountId?: Account["id"],
+) => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const {
-    control,
-    register,
     handleSubmit,
     formState: { errors },
     setError,
+    setValue,
+    ...form
   } = useForm<TransfertFormDTO>({
+    defaultValues: {
+      fromOwnerId: undefined,
+      fromAccountId: undefined,
+      toOwnerId: undefined,
+      toAccountId: undefined,
+      amount: 0,
+      description: "",
+    },
     resolver: zodResolver(transfertFormSchema),
   });
 
-  const { mutate, isPending } = useMutation({
+  if (ownerId) {
+    setValue("fromOwnerId", ownerId);
+  }
+
+  if (accountId) {
+    setValue("fromAccountId", accountId);
+  }
+
+  const { mutate, ...mutation } = useMutation({
     mutationFn: addTransfert,
     onSuccess: () => {
       toast.success("Transfert done successfully");
@@ -43,5 +63,10 @@ export const useAddTransfertForm = (accountId?: Account["id"]) => {
     mutate(data);
   });
 
-  return { isPending, control, register, errors, handleAddTransfert };
+  return {
+    ...form,
+    ...mutation,
+    errors,
+    handleAddTransfert,
+  };
 };
