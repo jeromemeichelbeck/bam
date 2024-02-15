@@ -3,7 +3,7 @@ import { Transfert } from "@/types/transfert";
 import { fetchJson } from "../fetchJson";
 
 export const searchTransferts = async (
-  accountId: number,
+  accountId?: number,
   limit = 10,
   skip = 0,
 ) => {

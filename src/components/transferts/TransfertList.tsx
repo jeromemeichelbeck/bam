@@ -12,11 +12,12 @@ import {
   useTheme,
 } from "@mui/material";
 import { FC } from "react";
+import ListPagination from "../UI/list/ListPagination";
 import ListRow from "../UI/list/ListRow";
 import LoadingTableRows from "../UI/list/LoadingTableRows";
 
 type TransfertListProps = {
-  accountId: Account["id"];
+  accountId?: Account["id"];
 };
 
 const TransfertList: FC<TransfertListProps> = ({ accountId }) => {
@@ -62,6 +63,7 @@ const TransfertList: FC<TransfertListProps> = ({ accountId }) => {
           )}
         </TableBody>
       </Table>
+      <ListPagination total={transferts?.count} />
     </TableContainer>
   );
 };
