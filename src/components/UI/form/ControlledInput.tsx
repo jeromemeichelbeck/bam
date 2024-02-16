@@ -16,6 +16,7 @@ type ControlledInputProps<
   label: string;
   type?: HTMLInputTypeAttribute;
   control: Control<TFieldValues>;
+  modify?: (value: string) => string;
 };
 
 const ControlledInput = <
@@ -26,6 +27,7 @@ const ControlledInput = <
   label,
   type = "text",
   control,
+  modify = (x) => x,
 }: ControlledInputProps<TValue, TFieldValues>) => {
   const { error } = control.getFieldState(name);
 
@@ -36,7 +38,7 @@ const ControlledInput = <
           type={type}
           label={label}
           value={value}
-          onChange={onChange}
+          onChange={(e) => onChange(modify(e.target.value))}
           error={!!error}
           helperText={error?.message}
           fullWidth

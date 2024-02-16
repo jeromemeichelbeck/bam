@@ -13,7 +13,6 @@ type ControlledSelectProps<
   TValue extends FieldValue<TFieldValues>,
   TFieldValues extends FieldValues,
 > = {
-  defaultValue?: TValue;
   control: Control<TFieldValues>;
   name: Path<TFieldValues>;
   label: string;
@@ -28,7 +27,6 @@ const ControlledSelect = <
   TValue extends FieldValue<TFieldValues>,
   TFieldValues extends FieldValues,
 >({
-  defaultValue,
   control,
   name,
   label,
@@ -110,7 +108,6 @@ const ControlledSelect = <
       }}
       name={name}
       control={control}
-      defaultValue={defaultValue}
     />
   );
 };

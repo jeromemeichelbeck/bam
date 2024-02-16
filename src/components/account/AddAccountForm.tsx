@@ -1,4 +1,5 @@
 import { useAddAccountForm } from "@/hooks/useAddAccountForm";
+import { limitDecimals } from "@/utils/formatting/limitDecimals";
 import { Alert, Button, Grid, Stack } from "@mui/material";
 import Link from "next/link";
 import { FC } from "react";
@@ -22,6 +23,8 @@ const AddAccountForm: FC<AddAccountFormProps> = () => {
         label="Account Initial Balance"
         name="balance"
         control={control}
+        // Limit to 2 decimals
+        modify={(value) => limitDecimals(value, 2)}
       />
       {errors?.root?.message && (
         <Alert severity="error">{errors.root.message}</Alert>

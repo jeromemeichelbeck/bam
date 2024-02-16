@@ -43,7 +43,9 @@ export const useAddAccountForm = () => {
   });
 
   const handleAddAccount = handleSubmit(async (data) => {
-    mutate(data);
+    const balance = data.balance * 100;
+
+    mutate({ ...data, balance });
   });
 
   return { isPending, control, register, errors, handleAddAccount };
