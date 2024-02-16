@@ -15,6 +15,7 @@ import { Control } from "react-hook-form";
 import AmountStep from "./AmountStep";
 import FromAccountStep from "./FromAccountStep";
 import ToAccountStep from "./ToAccountStep";
+import TransfertStepperNavigation from "./TrasfertStepperNavigation";
 
 export type TransfertStepProps = {
   values: TransfertFormDTO;
@@ -107,20 +108,14 @@ const TransfertStepper: FC<TransfertStepperProps> = ({
       ) : (
         <>
           {steps[activeStep].component}
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0 && !accountId && !ownerId}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              {activeStep > 0 ? "Back" : "Cancel"}
-            </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>
-          </Box>
+          <TransfertStepperNavigation
+            backLabel={activeStep > 0 ? "Back" : "Cancel"}
+            disableBack={activeStep === 0 && !accountId && !ownerId}
+            handleBack={handleBack}
+            nextLabel={activeStep === steps.length - 1 ? "Finish" : "Next"}
+            disableNext={false}
+            handleNext={handleNext}
+          />
         </>
       )}
     </>
