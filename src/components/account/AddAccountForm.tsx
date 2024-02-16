@@ -1,7 +1,8 @@
 import { useAddAccountForm } from "@/hooks/useAddAccountForm";
-import { Alert, Button, Grid, Stack, TextField } from "@mui/material";
+import { Alert, Button, Grid, Stack } from "@mui/material";
 import Link from "next/link";
 import { FC } from "react";
+import ControlledInput from "../UI/form/ControlledInput";
 import CurrencySelect from "../shared/CurrencySelect";
 import OwnerSelect from "../shared/OwnerSelect";
 
@@ -14,22 +15,13 @@ const AddAccountForm: FC<AddAccountFormProps> = () => {
   return (
     <Stack component="form" onSubmit={handleAddAccount} gap={2}>
       <OwnerSelect control={control} />
-      <TextField
-        {...register("name")}
-        type="text"
-        label="Account Name"
-        error={!!errors.name}
-        helperText={errors.name?.message}
-        fullWidth
-      />
+      <ControlledInput name="name" label="Account name" control={control} />
       <CurrencySelect control={control} />
-      <TextField
-        {...register("balance")}
+      <ControlledInput
         type="number"
         label="Account Initial Balance"
-        error={!!errors.balance}
-        helperText={errors.balance?.message}
-        fullWidth
+        name="balance"
+        control={control}
       />
       {errors?.root?.message && (
         <Alert severity="error">{errors.root.message}</Alert>

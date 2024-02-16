@@ -17,6 +17,12 @@ export const useAddAccountForm = () => {
     formState: { errors },
     setError,
   } = useForm<AccountFormDTO>({
+    defaultValues: {
+      ownerId: undefined,
+      name: "",
+      currency: "EUR",
+      balance: 0,
+    },
     resolver: zodResolver(accountFormSchema),
   });
 

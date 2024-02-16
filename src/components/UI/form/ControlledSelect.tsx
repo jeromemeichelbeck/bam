@@ -45,6 +45,7 @@ const ControlledSelect = <
     fieldState: { error },
   } = useController({ name, control });
 
+  // Reset the value if it's not found in the options
   useEffect(() => {
     if (
       optionKey &&
