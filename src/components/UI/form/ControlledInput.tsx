@@ -1,17 +1,8 @@
 import { TextField } from "@mui/material";
 import { HTMLInputTypeAttribute } from "react";
-import {
-  Control,
-  Controller,
-  FieldValue,
-  FieldValues,
-  Path,
-} from "react-hook-form";
+import { Control, Controller, FieldValues, Path } from "react-hook-form";
 
-type ControlledInputProps<
-  TValue extends FieldValue<TFieldValues>,
-  TFieldValues extends FieldValues,
-> = {
+type ControlledInputProps<TFieldValues extends FieldValues> = {
   name: Path<TFieldValues>;
   label: string;
   type?: HTMLInputTypeAttribute;
@@ -19,16 +10,13 @@ type ControlledInputProps<
   modify?: (value: string) => string;
 };
 
-const ControlledInput = <
-  TValue extends FieldValue<TFieldValues>,
-  TFieldValues extends FieldValues,
->({
+const ControlledInput = <TFieldValues extends FieldValues>({
   name,
   label,
   type = "text",
   control,
   modify = (x) => x,
-}: ControlledInputProps<TValue, TFieldValues>) => {
+}: ControlledInputProps<TFieldValues>) => {
   const { error } = control.getFieldState(name);
 
   return (

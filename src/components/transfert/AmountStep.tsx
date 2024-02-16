@@ -2,7 +2,7 @@ import { useGetOneAccount } from "@/hooks/useGetOneAccount";
 import { Typography } from "@mui/material";
 import { FC } from "react";
 import { useController } from "react-hook-form";
-import ControlledInput from "../UI/form/ControlledInput";
+import AmountInput from "../shared/AmountInput";
 import { TransfertStepperProps } from "./TransfertStepper";
 
 const AmountStep: FC<TransfertStepperProps> = ({ control }) => {
@@ -15,11 +15,7 @@ const AmountStep: FC<TransfertStepperProps> = ({ control }) => {
   return (
     <>
       <Typography variant="h4">Select the amount to transfer</Typography>
-      <ControlledInput
-        name="amount"
-        label="Amount to transfer"
-        control={control}
-      />
+      <AmountInput name="amount" label="Amount to transfer" control={control} />
     </>
   );
 };

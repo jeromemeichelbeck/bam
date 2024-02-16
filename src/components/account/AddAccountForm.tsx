@@ -1,9 +1,9 @@
 import { useAddAccountForm } from "@/hooks/useAddAccountForm";
-import { limitDecimals } from "@/utils/formatting/limitDecimals";
 import { Alert, Button, Grid, Stack } from "@mui/material";
 import Link from "next/link";
 import { FC } from "react";
 import ControlledInput from "../UI/form/ControlledInput";
+import AmountInput from "../shared/AmountInput";
 import CurrencySelect from "../shared/CurrencySelect";
 import OwnerSelect from "../shared/OwnerSelect";
 
@@ -18,13 +18,10 @@ const AddAccountForm: FC<AddAccountFormProps> = () => {
       <OwnerSelect control={control} />
       <ControlledInput name="name" label="Account name" control={control} />
       <CurrencySelect control={control} />
-      <ControlledInput
-        type="number"
-        label="Account Initial Balance"
+      <AmountInput
         name="balance"
+        label="Account Initial Balance"
         control={control}
-        // Limit to 2 decimals
-        modify={(value) => limitDecimals(value, 2)}
       />
       {errors?.root?.message && (
         <Alert severity="error">{errors.root.message}</Alert>
