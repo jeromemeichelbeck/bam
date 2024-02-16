@@ -1,4 +1,5 @@
 import { useAccountId } from "@/hooks/useAccountId";
+import { useGetOneAccount } from "@/hooks/useGetOneAccount";
 import { useOwnerId } from "@/hooks/useOwnerId";
 import { TransfertFormDTO } from "@/schemas/transfert";
 import {
@@ -11,7 +12,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
-import { Control } from "react-hook-form";
+import { Control, useController } from "react-hook-form";
 import AmountStep from "./AmountStep";
 import FromAccountStep from "./FromAccountStep";
 import ToAccountStep from "./ToAccountStep";
@@ -25,6 +26,16 @@ export type TransfertStepperProps = {
 const TransfertStepper: FC<TransfertStepperProps> = (stepperProps) => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(0);
+
+  const {
+    field: { value: fromAccountId },
+  } = useController({ name: "fromOwnerId", control: stepperProps.control });
+
+  const {
+    field: { value: amount },
+  } = useController({ name: "amount", control: stepperProps.control });
+
+  const { data: fromAccount } = useGetOneAccount(fromAccountId);
 
   const { ownerId } = useOwnerId();
   const { accountId } = useAccountId();
@@ -40,6 +51,20 @@ const TransfertStepper: FC<TransfertStepperProps> = (stepperProps) => {
 
     if (activeStep === 1) {
       checked &&= await stepperProps.validateStep(["toOwnerId", "toAccountId"]);
+    }
+
+    if (activeStep === 2) {
+      checked &&= await stepperProps.validateStep(["amount"]);
+      // Check if the amount is not greater than the account balance
+      if (fromAccount) {
+        const inssuficientFunds = fromAccount.balance < amount;
+        if (inssuficientFunds) {
+          stepperProps.control.setError("amount", {
+            message: "Insufficient funds",
+          });
+        }
+        checked &&= !inssuficientFunds;
+      }
     }
 
     if (!checked) {
