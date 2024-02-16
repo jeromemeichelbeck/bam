@@ -12,14 +12,12 @@ type AccountSelectFields =
 
 type AccountSelectProps<TFields extends AccountSelectFields> = {
   ownerId?: Account["ownerId"];
-  defaultAccount?: Account;
   control: Control<TFields>;
   name?: "accountId" | "toAccountId" | "fromAccountId";
 };
 
 const AccountSelect = <TFields extends AccountSelectFields>({
   ownerId,
-  defaultAccount,
   control,
   name = "accountId",
 }: AccountSelectProps<TFields>) => {
@@ -29,7 +27,6 @@ const AccountSelect = <TFields extends AccountSelectFields>({
 
   return (
     <ControlledSelect
-      defaultValue={defaultAccount}
       control={control as unknown as Control<AccountSelectFields>}
       name={name}
       label="Account"

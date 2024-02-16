@@ -11,13 +11,11 @@ type OwnerSelectFields =
   | { toOwnerId: Owner["id"] };
 
 type OwnerSelectProps<TFields extends OwnerSelectFields> = {
-  defaultOwner?: Owner;
   control: Control<TFields>;
   name?: "ownerId" | "fromOwnerId" | "toOwnerId";
 };
 
 const OwnerSelect = <TFields extends OwnerSelectFields>({
-  defaultOwner,
   control,
   name = "ownerId",
 }: OwnerSelectProps<TFields>) => {
@@ -27,7 +25,6 @@ const OwnerSelect = <TFields extends OwnerSelectFields>({
 
   return (
     <ControlledSelect
-      defaultValue={defaultOwner}
       control={control as unknown as Control<OwnerSelectFields>}
       name={name}
       label="Account Owner"
