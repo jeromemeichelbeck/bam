@@ -4,8 +4,8 @@ import { z } from "zod";
 export const accountFormSchema = z.object({
   ownerId: z.coerce
     .number({ invalid_type_error: "Please select an owner" })
-    .int()
-    .positive(),
+    .int("Please select an owner")
+    .positive("Please select an owner"),
   name: z.string().min(1, "Account name is required"),
   currency: z.enum(availableCurrencies),
   balance: z.coerce

@@ -3,21 +3,20 @@ import { z } from "zod";
 
 export const transfertFormSchema = z.object({
   fromOwnerId: z.coerce
-    .number()
-    .int()
+    .number({ invalid_type_error: "Please select a source account owner" })
+    .int("Please select a source account owner")
     .positive("Please select a source account owner"),
   fromAccountId: z.coerce
-    .number()
-    .int()
-    .positive("Please select a source account")
-    .transform((e) => (!e ? null : e)),
+    .number({ invalid_type_error: "Please select a source account" })
+    .int("Please select a source account")
+    .positive("Please select a source account"),
   toOwnerId: z.coerce
-    .number()
-    .int()
+    .number({ invalid_type_error: "Please select a destination account owner" })
+    .int("Please select a destination account owner")
     .positive("Please select a destination account owner"),
   toAccountId: z.coerce
-    .number()
-    .int()
+    .number({ invalid_type_error: "Please select a destination account" })
+    .int("Please select a destination account")
     .positive("Please select a destination account"),
   amount: z.coerce
     .number({ invalid_type_error: "Please enter a valid number" })
