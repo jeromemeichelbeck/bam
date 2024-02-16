@@ -1,22 +1,36 @@
 import { TextField } from "@mui/material";
 import { HTMLInputTypeAttribute } from "react";
-import { Control, Controller, FieldValues, Path } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldValue,
+  FieldValues,
+  Path,
+} from "react-hook-form";
 
-type ControlledInputProps<TFieldValues extends FieldValues> = {
+type ControlledInputProps<
+  TValue extends FieldValue<TFieldValues>,
+  TFieldValues extends FieldValues,
+> = {
   name: Path<TFieldValues>;
   label: string;
   type?: HTMLInputTypeAttribute;
   control: Control<TFieldValues>;
-  modify?: (value: string) => string;
+  fromInput?: (value: string) => string;
+  toInput?: (value: TValue) => string;
 };
 
-const ControlledInput = <TFieldValues extends FieldValues>({
+const ControlledInput = <
+  TValue extends FieldValue<TFieldValues>,
+  TFieldValues extends FieldValues,
+>({
   name,
   label,
   type = "text",
   control,
-  modify = (x) => x,
-}: ControlledInputProps<TFieldValues>) => {
+  fromInput = (x) => x,
+  toInput = (x) => x.toString(),
+}: ControlledInputProps<TValue, TFieldValues>) => {
   const { error } = control.getFieldState(name);
 
   return (
@@ -25,10 +39,13 @@ const ControlledInput = <TFieldValues extends FieldValues>({
         <TextField
           type={type}
           label={label}
-          value={value}
-          onChange={(e) => onChange(modify(e.target.value))}
+          value={toInput(value)}
+          onChange={(e) => onChange(fromInput(e.target.value))}
           error={!!error}
           helperText={error?.message}
+          inputProps={{
+            step: type === "number" ? "0.01" : undefined,
+          }}
           fullWidth
         />
       )}

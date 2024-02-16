@@ -19,7 +19,9 @@ export const transfertFormSchema = z.object({
     .number()
     .int()
     .positive("Please select a destination account"),
-  amount: z.coerce.number().positive("Amount must be positive"),
+  amount: z.coerce
+    .number({ invalid_type_error: "Please enter a valid number" })
+    .positive("Amount must be positive"),
   description: z
     .string()
     .min(10, "The description should be at least 10 characters long")

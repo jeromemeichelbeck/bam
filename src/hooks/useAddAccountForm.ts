@@ -21,7 +21,7 @@ export const useAddAccountForm = () => {
       ownerId: undefined,
       name: "",
       currency: "EUR",
-      balance: 0,
+      balance: undefined,
     },
     resolver: zodResolver(accountFormSchema),
   });
@@ -43,9 +43,7 @@ export const useAddAccountForm = () => {
   });
 
   const handleAddAccount = handleSubmit(async (data) => {
-    const balance = data.balance * 100;
-
-    mutate({ ...data, balance });
+    mutate(data);
   });
 
   return { isPending, control, register, errors, handleAddAccount };
