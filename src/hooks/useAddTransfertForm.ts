@@ -31,16 +31,17 @@ export const useAddTransfertForm = (
       amount: 0,
       description: "",
     },
+    mode: "onChange",
     resolver: zodResolver(transfertFormSchema),
   });
 
   // Change default values when ownerId or accountId are provided
   useEffect(() => {
     if (ownerId) {
-      setValue("fromOwnerId", ownerId);
+      setValue("fromOwnerId", ownerId, { shouldTouch: true });
     }
     if (accountId) {
-      setValue("fromAccountId", accountId);
+      setValue("fromAccountId", accountId, { shouldTouch: true });
     }
   }, [ownerId, accountId, setValue]);
 

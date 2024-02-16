@@ -1,31 +1,27 @@
 import { Typography } from "@mui/material";
-import { FC, useEffect } from "react";
+import { FC } from "react";
+import { useController } from "react-hook-form";
 import AccountSelect from "../shared/AccountSelect";
 import OwnerSelect from "../shared/OwnerSelect";
-import { TransfertStepProps } from "./TransfertStepper";
+import { TransfertStepperProps } from "./TransfertStepper";
 
-const FromAccountStep: FC<TransfertStepProps> = ({
-  values,
-  resetFromAccountId,
-  control,
-}) => {
-  // Unselect the account when the owner is changed
-  useEffect(() => {
-    resetFromAccountId();
-  }, [resetFromAccountId, values.fromOwnerId]);
+const FromAccountStep: FC<TransfertStepperProps> = ({ control }) => {
+  const {
+    field: { value: fromOwnerId },
+  } = useController({ name: "fromOwnerId", control });
 
   return (
     <>
       <Typography variant="h4">Select source account</Typography>
       <Typography variant="h5">Select the Account owner:</Typography>
       <OwnerSelect control={control} name="fromOwnerId" />
-      {values.fromOwnerId && (
+      {fromOwnerId && (
         <>
           <Typography variant="h5">Select the Account:</Typography>
           <AccountSelect
             name="fromAccountId"
             control={control}
-            ownerId={values.fromOwnerId}
+            ownerId={fromOwnerId}
           />
         </>
       )}

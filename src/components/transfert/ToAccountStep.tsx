@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 import { FC } from "react";
-import { TransfertStepProps } from "./TransfertStepper";
+import { TransfertStepperProps } from "./TransfertStepper";
 
-const ToAccountStep: FC<TransfertStepProps> = () => {
+const ToAccountStep: FC<TransfertStepperProps> = () => {
   return (
     <>
       <Typography variant="h4">Select destination account</Typography>

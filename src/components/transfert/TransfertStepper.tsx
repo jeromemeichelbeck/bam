@@ -17,33 +17,31 @@ import FromAccountStep from "./FromAccountStep";
 import ToAccountStep from "./ToAccountStep";
 import TransfertStepperNavigation from "./TrasfertStepperNavigation";
 
-export type TransfertStepProps = {
-  values: TransfertFormDTO;
-  resetFromAccountId: () => void;
-  resetToAccountId: () => void;
+export type TransfertStepperProps = {
   control: Control<TransfertFormDTO>;
+  validateStep: (flields: (keyof TransfertFormDTO)[]) => Promise<boolean>;
 };
 
-type TransfertStepperProps = {
-  values: TransfertFormDTO;
-  resetFromAccountId: () => void;
-  resetToAccountId: () => void;
-  control: Control<TransfertFormDTO>;
-};
-
-const TransfertStepper: FC<TransfertStepperProps> = ({
-  values,
-  resetFromAccountId,
-  resetToAccountId,
-  control,
-}) => {
+const TransfertStepper: FC<TransfertStepperProps> = (stepperProps) => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(0);
 
   const { ownerId } = useOwnerId();
   const { accountId } = useAccountId();
 
-  const handleNext = () => {
+  const handleNext = async () => {
+    let checked = false;
+    if (activeStep === 0) {
+      checked = await stepperProps.validateStep([
+        "fromOwnerId",
+        "fromAccountId",
+      ]);
+    }
+
+    if (!checked) {
+      return;
+    }
+
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -65,23 +63,16 @@ const TransfertStepper: FC<TransfertStepperProps> = ({
     setActiveStep(0);
   };
 
-  const stepProps: TransfertStepProps = {
-    values,
-    resetFromAccountId,
-    resetToAccountId,
-    control,
-  };
-
   const steps = [
     {
       label: "Select source account",
-      component: <FromAccountStep {...stepProps} />,
+      component: <FromAccountStep {...stepperProps} />,
     },
     {
       label: "Select destination account",
-      component: <ToAccountStep {...stepProps} />,
+      component: <ToAccountStep {...stepperProps} />,
     },
-    { label: "Enter amount", component: <AmountStep {...stepProps} /> },
+    { label: "Enter amount", component: <AmountStep {...stepperProps} /> },
   ];
 
   return (
