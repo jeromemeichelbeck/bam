@@ -30,12 +30,16 @@ const TransfertStepper: FC<TransfertStepperProps> = (stepperProps) => {
   const { accountId } = useAccountId();
 
   const handleNext = async () => {
-    let checked = false;
+    let checked = true;
     if (activeStep === 0) {
-      checked = await stepperProps.validateStep([
+      checked &&= await stepperProps.validateStep([
         "fromOwnerId",
         "fromAccountId",
       ]);
+    }
+
+    if (activeStep === 1) {
+      checked &&= await stepperProps.validateStep(["toOwnerId", "toAccountId"]);
     }
 
     if (!checked) {
