@@ -15,6 +15,7 @@ import { FC, useState } from "react";
 import { Control, useController } from "react-hook-form";
 import AmountStep from "./AmountStep";
 import FromAccountStep from "./FromAccountStep";
+import SummaryStep from "./SummaryStep";
 import ToAccountStep from "./ToAccountStep";
 import TransfertStepperNavigation from "./TrasfertStepperNavigation";
 
@@ -102,6 +103,7 @@ const TransfertStepper: FC<TransfertStepperProps> = (stepperProps) => {
       component: <ToAccountStep {...stepperProps} />,
     },
     { label: "Enter amount", component: <AmountStep {...stepperProps} /> },
+    { label: "Summary", component: <SummaryStep {...stepperProps} /> },
   ];
 
   return (
