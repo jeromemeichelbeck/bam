@@ -2,9 +2,9 @@ import { Typography } from "@mui/material";
 import { FC, useEffect } from "react";
 import AccountSelect from "../shared/AccountSelect";
 import OwnerSelect from "../shared/OwnerSelect";
-import { StepProps } from "./TransfertStepper";
+import { TransfertStepProps } from "./TransfertStepper";
 
-const FromAccountStep: FC<StepProps> = ({
+const FromAccountStep: FC<TransfertStepProps> = ({
   values,
   resetFromAccountId,
   control,

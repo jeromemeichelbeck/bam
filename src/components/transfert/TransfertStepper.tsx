@@ -16,13 +16,7 @@ import AmountStep from "./AmountStep";
 import FromAccountStep from "./FromAccountStep";
 import ToAccountStep from "./ToAccountStep";
 
-const steps = [
-  { label: "Select source account", component: FromAccountStep },
-  { label: "Select destination account", component: ToAccountStep },
-  { label: "Enter amount", component: AmountStep },
-];
-
-export type StepProps = {
+export type TransfertStepProps = {
   values: TransfertFormDTO;
   resetFromAccountId: () => void;
   resetToAccountId: () => void;
@@ -70,6 +64,25 @@ const TransfertStepper: FC<TransfertStepperProps> = ({
     setActiveStep(0);
   };
 
+  const stepProps: TransfertStepProps = {
+    values,
+    resetFromAccountId,
+    resetToAccountId,
+    control,
+  };
+
+  const steps = [
+    {
+      label: "Select source account",
+      component: <FromAccountStep {...stepProps} />,
+    },
+    {
+      label: "Select destination account",
+      component: <ToAccountStep {...stepProps} />,
+    },
+    { label: "Enter amount", component: <AmountStep {...stepProps} /> },
+  ];
+
   return (
     <>
       <Stepper activeStep={activeStep}>
@@ -93,12 +106,7 @@ const TransfertStepper: FC<TransfertStepperProps> = ({
         </>
       ) : (
         <>
-          {steps[activeStep].component({
-            control,
-            values,
-            resetFromAccountId,
-            resetToAccountId,
-          })}
+          {steps[activeStep].component}
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"
