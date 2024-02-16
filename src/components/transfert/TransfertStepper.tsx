@@ -1,4 +1,5 @@
 import { useAccountId } from "@/hooks/useAccountId";
+import { useAddTransfertForm } from "@/hooks/useAddTransfertForm";
 import { useGetOneAccount } from "@/hooks/useGetOneAccount";
 import { useOwnerId } from "@/hooks/useOwnerId";
 import { TransfertFormDTO } from "@/schemas/transfert";
@@ -19,53 +20,58 @@ import SummaryStep from "./SummaryStep";
 import ToAccountStep from "./ToAccountStep";
 import TransfertStepperNavigation from "./TrasfertStepperNavigation";
 
-export type TransfertStepperProps = {
+export type TransfertStepProps = {
   control: Control<TransfertFormDTO>;
-  validateStep: (flields: (keyof TransfertFormDTO)[]) => Promise<boolean>;
 };
 
-const TransfertStepper: FC<TransfertStepperProps> = (stepperProps) => {
+const TransfertStepper: FC = () => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(0);
-
-  const {
-    field: { value: fromAccountId },
-  } = useController({ name: "fromOwnerId", control: stepperProps.control });
-
-  const {
-    field: { value: amount },
-  } = useController({ name: "amount", control: stepperProps.control });
-
-  const { data: fromAccount } = useGetOneAccount(fromAccountId);
 
   const { ownerId } = useOwnerId();
   const { accountId } = useAccountId();
 
+  const { control, handleAddTransfert, trigger } = useAddTransfertForm(
+    ownerId,
+    accountId,
+  );
+
+  const {
+    field: { value: fromAccountId },
+  } = useController({ name: "fromOwnerId", control });
+
+  const {
+    field: { value: amount },
+  } = useController({ name: "amount", control });
+
+  const { data: fromAccount } = useGetOneAccount(fromAccountId);
+
   const handleNext = async () => {
     let checked = true;
     if (activeStep === 0) {
-      checked &&= await stepperProps.validateStep([
-        "fromOwnerId",
-        "fromAccountId",
-      ]);
+      checked &&= await trigger(["fromOwnerId", "fromAccountId"]);
     }
 
     if (activeStep === 1) {
-      checked &&= await stepperProps.validateStep(["toOwnerId", "toAccountId"]);
+      checked &&= await trigger(["toOwnerId", "toAccountId"]);
     }
 
     if (activeStep === 2) {
-      checked &&= await stepperProps.validateStep(["amount"]);
+      checked &&= await trigger(["amount"]);
       // Check if the amount is not greater than the account balance
       if (fromAccount) {
         const inssuficientFunds = fromAccount.balance < amount;
         if (inssuficientFunds) {
-          stepperProps.control.setError("amount", {
+          control.setError("amount", {
             message: "Insufficient funds",
           });
         }
         checked &&= !inssuficientFunds;
       }
+    }
+
+    if (activeStep === 3) {
+      return handleAddTransfert();
     }
 
     if (!checked) {
@@ -96,14 +102,14 @@ const TransfertStepper: FC<TransfertStepperProps> = (stepperProps) => {
   const steps = [
     {
       label: "Select source account",
-      component: <FromAccountStep {...stepperProps} />,
+      component: <FromAccountStep control={control} />,
     },
     {
       label: "Select destination account",
-      component: <ToAccountStep {...stepperProps} />,
+      component: <ToAccountStep control={control} />,
     },
-    { label: "Enter amount", component: <AmountStep {...stepperProps} /> },
-    { label: "Summary", component: <SummaryStep {...stepperProps} /> },
+    { label: "Enter amount", component: <AmountStep control={control} /> },
+    { label: "Summary", component: <SummaryStep control={control} /> },
   ];
 
   return (
@@ -134,7 +140,7 @@ const TransfertStepper: FC<TransfertStepperProps> = (stepperProps) => {
             backLabel={activeStep > 0 ? "Back" : "Cancel"}
             disableBack={activeStep === 0 && !accountId && !ownerId}
             handleBack={handleBack}
-            nextLabel={activeStep === steps.length - 1 ? "Finish" : "Next"}
+            nextLabel={activeStep === steps.length - 1 ? "Validate" : "Next"}
             disableNext={false}
             handleNext={handleNext}
           />

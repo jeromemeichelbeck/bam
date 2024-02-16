@@ -3,9 +3,9 @@ import { FC } from "react";
 import { useController } from "react-hook-form";
 import AccountSelect from "../shared/AccountSelect";
 import OwnerSelect from "../shared/OwnerSelect";
-import { TransfertStepperProps } from "./TransfertStepper";
+import { TransfertStepProps } from "./TransfertStepper";
 
-const ToAccountStep: FC<TransfertStepperProps> = ({ control }) => {
+const ToAccountStep: FC<TransfertStepProps> = ({ control }) => {
   const {
     field: { value: toOwnerId },
   } = useController({ name: "toOwnerId", control });
