@@ -3,14 +3,7 @@ import { useAddTransferForm } from "@/hooks/useAddTransferForm";
 import { useGetOneAccount } from "@/hooks/useGetOneAccount";
 import { useOwnerId } from "@/hooks/useOwnerId";
 import { TransferFormDTO } from "@/schemas/transfer";
-import {
-  Box,
-  Button,
-  Step,
-  StepLabel,
-  Stepper,
-  Typography,
-} from "@mui/material";
+import { Step, StepLabel, Stepper } from "@mui/material";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { Control, useController } from "react-hook-form";
@@ -31,7 +24,7 @@ const TransferStepper: FC = () => {
   const { ownerId } = useOwnerId();
   const { accountId } = useAccountId();
 
-  const { control, handleAddTransfer, trigger } = useAddTransferForm(
+  const { control, handleAddTransfer, trigger, isPending } = useAddTransferForm(
     ownerId,
     accountId,
   );
@@ -95,10 +88,6 @@ const TransferStepper: FC = () => {
     }
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
   const steps = [
     {
       label: "Select source account",
@@ -125,27 +114,17 @@ const TransferStepper: FC = () => {
           );
         })}
       </Stepper>
-      {activeStep === steps.length ? (
-        <>
-          <Typography sx={{ mt: 2, mb: 1 }}>Some kind of recap</Typography>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box>
-        </>
-      ) : (
-        <>
-          {steps[activeStep].component}
-          <TransferStepperNavigation
-            backLabel={activeStep > 0 ? "Back" : "Cancel"}
-            disableBack={activeStep === 0 && !accountId && !ownerId}
-            handleBack={handleBack}
-            nextLabel={activeStep === steps.length - 1 ? "Validate" : "Next"}
-            disableNext={false}
-            handleNext={handleNext}
-          />
-        </>
-      )}
+      <>
+        {steps[activeStep].component}
+        <TransferStepperNavigation
+          backLabel={activeStep > 0 ? "Back" : "Cancel"}
+          disableBack={activeStep === 0 && !accountId && !ownerId}
+          handleBack={handleBack}
+          nextLabel={activeStep === steps.length - 1 ? "Validate" : "Next"}
+          disableNext={activeStep === 3 && isPending}
+          handleNext={handleNext}
+        />
+      </>
     </>
   );
 };

@@ -24,7 +24,9 @@ const TransferStepperNavigation: FC<TransferStepperNavigationProps> = ({
         {backLabel}
       </Button>
       <Box sx={{ flex: "1 1 auto" }} />
-      <Button onClick={handleNext}>{nextLabel}</Button>
+      <Button disabled={disableNext} onClick={handleNext}>
+        {nextLabel}
+      </Button>
     </Box>
   );
 };
