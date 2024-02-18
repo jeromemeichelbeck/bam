@@ -1,5 +1,5 @@
 import { useAddAccountForm } from "@/hooks/useAddAccountForm";
-import { Alert, Button, Grid, Stack } from "@mui/material";
+import { Alert, Button, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { FC } from "react";
 import ControlledInput from "../UI/form/ControlledInput";
@@ -13,7 +13,8 @@ const AddAccountForm: FC<AddAccountFormProps> = () => {
   const { isPending, control, handleAddAccount, errors } = useAddAccountForm();
 
   return (
-    <Stack component="form" onSubmit={handleAddAccount} gap={2}>
+    <Stack component="form" onSubmit={handleAddAccount} spacing={4}>
+      <Typography variant="h4">Create a new account</Typography>
       <OwnerSelect control={control} />
       <ControlledInput name="name" label="Account name" control={control} />
       <CurrencySelect control={control} />

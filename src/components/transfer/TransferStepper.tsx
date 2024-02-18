@@ -38,7 +38,7 @@ const TransferStepper: FC = () => {
 
   const {
     field: { value: fromAccountId },
-  } = useController({ name: "fromOwnerId", control });
+  } = useController({ name: "fromAccountId", control });
 
   const {
     field: { value: amount },

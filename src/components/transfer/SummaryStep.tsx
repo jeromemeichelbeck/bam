@@ -1,7 +1,7 @@
 import { useTransferSummary } from "@/hooks/useTransferSummary";
 import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import { ArrowCircleRightTwoTone } from "@mui/icons-material";
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import Skeleton from "react-loading-skeleton";
 import { TransferStepProps } from "./TransferStepper";
@@ -11,7 +11,7 @@ const SummaryStep: FC<TransferStepProps> = ({ control }) => {
     useTransferSummary(control);
 
   return (
-    <>
+    <Stack spacing={4}>
       <Typography variant="h4">Summary of the fund transfer</Typography>
       <Box display="flex" flexDirection="row" justifyContent="space-around">
         <Card>
@@ -63,8 +63,7 @@ const SummaryStep: FC<TransferStepProps> = ({ control }) => {
           </CardContent>
         </Card>
       </Box>
-      <p>Summary of the transfer</p>
-    </>
+    </Stack>
   );
 };
 
