@@ -5,9 +5,9 @@ import { getOneRate } from "../rates/getOneRate";
 import { saveEntities } from "../shared/saveEntities";
 import { getAllTransferts } from "./getAllTranferts";
 
-type TranfertDTO = Omit<
+type TranfertDTO = Pick<
   Transfert,
-  "id" | "date" | "currency" | "toAmount" | "toCurrency" | "rate"
+  "fromAccountId" | "toAccountId" | "amount" | "description"
 >;
 
 export const addTransfert = async (transfert: TranfertDTO) => {
@@ -58,9 +58,11 @@ export const addTransfert = async (transfert: TranfertDTO) => {
     ...transfert,
     id,
     date,
+    fromAccountName: fromAccount.name,
     currency: fromAccount.currency,
     toAmount,
     toCurrency: toAccount.currency,
+    toAccountName: toAccount.name,
     rate,
   };
 

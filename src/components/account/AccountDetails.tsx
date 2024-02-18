@@ -32,9 +32,9 @@ const AccountDetails: FC<AccountDetailsProps> = ({ accountId }) => {
           )}`
           )}
         </Typography>
+        <AddTransfertButton ownerId={account?.ownerId} accountId={accountId} />
+        <TransfertList accountId={accountId} />
       </Stack>
-      <AddTransfertButton ownerId={account?.ownerId} accountId={accountId} />
-      <TransfertList accountId={accountId} />
     </Paper>
   );
 };

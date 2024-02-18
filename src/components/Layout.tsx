@@ -15,7 +15,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <Stack minHeight="100vh">
       <Header />
-      <Container sx={{ flex: 1 }}>{children}</Container>
+      <Container sx={{ flex: 1, padding: 4 }}>{children}</Container>
       <ToastContainer />
       <Footer />
     </Stack>

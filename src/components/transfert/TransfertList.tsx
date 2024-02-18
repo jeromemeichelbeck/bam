@@ -1,5 +1,8 @@
 import { useSearchTransfertsQuery } from "@/hooks/useSearchTransfertsQuery";
 import { Account } from "@/types/account";
+import { Transfert } from "@/types/transfert";
+import { getFormatedDateTime } from "@/utils/formatting/getFormatedDateTime";
+import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import {
   Alert,
   Paper,
@@ -9,12 +12,37 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
   useTheme,
 } from "@mui/material";
 import { FC } from "react";
+import Skeleton from "react-loading-skeleton";
 import ListPagination from "../UI/list/ListPagination";
 import ListRow from "../UI/list/ListRow";
 import LoadingTableRows from "../UI/list/LoadingTableRows";
+
+type TransfertListAmountProps = {
+  accountId?: Account["id"];
+  transfert?: Transfert;
+};
+
+const TransfertListAmount: FC<TransfertListAmountProps> = ({
+  accountId,
+  transfert,
+}) => {
+  const theme = useTheme();
+  if (!accountId || !transfert) return <Skeleton />;
+
+  return transfert.fromAccountId === accountId ? (
+    <Typography color={theme.palette.error.main}>
+      {`- ${getFormattedAmount(transfert.amount, transfert.currency)}`}
+    </Typography>
+  ) : (
+    <Typography color={theme.palette.success.main}>
+      {getFormattedAmount(transfert.toAmount, transfert.toCurrency)}
+    </Typography>
+  );
+};
 
 type TransfertListProps = {
   accountId?: Account["id"];
@@ -29,14 +57,16 @@ const TransfertList: FC<TransfertListProps> = ({ accountId }) => {
     error,
   } = useSearchTransfertsQuery(accountId);
 
+  console.log(transferts?.data || []);
+
   return (
     <TableContainer component={Paper}>
       {error && <Alert severity="error">{error.message}</Alert>}
       <Table aria-label="Transferts list">
         <TableHead>
           <TableRow>
-            <TableCell>From</TableCell>
-            <TableCell>To</TableCell>
+            <TableCell>Date</TableCell>
+            <TableCell>Description</TableCell>
             <TableCell>Amount</TableCell>
           </TableRow>
         </TableHead>
@@ -46,11 +76,22 @@ const TransfertList: FC<TransfertListProps> = ({ accountId }) => {
           ) : (
             (transferts?.data || []).map((transfert, index) => (
               <ListRow
-                key={index}
+                key={transfert.id}
                 data={[
-                  transfert.fromAccountId,
-                  transfert.toAccountId,
-                  transfert.amount,
+                  transfert.date ? (
+                    getFormatedDateTime(transfert.date)
+                  ) : (
+                    <Skeleton />
+                  ),
+                  transfert.description || <Skeleton />,
+                  transfert.amount && transfert.currency ? (
+                    <TransfertListAmount
+                      accountId={accountId}
+                      transfert={transfert}
+                    />
+                  ) : (
+                    <Skeleton />
+                  ),
                 ]}
                 onClick={() => {
                   console.log("click");
