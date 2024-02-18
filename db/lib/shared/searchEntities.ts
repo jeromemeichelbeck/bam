@@ -22,8 +22,8 @@ export const searchEntities = <
   const {
     limit = DEFAULT_LIMIT,
     skip = DEFAULT_SKIP,
-    sortBy,
-    sortOrder,
+    sortBy = "id",
+    sortOrder = "desc",
     q,
     ...query
   } = searchOptions;
