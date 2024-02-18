@@ -21,10 +21,7 @@ export const transferFormSchema = z.object({
   amount: z.coerce
     .number({ invalid_type_error: "Please enter a valid number" })
     .positive("Amount must be positive"),
-  description: z
-    .string()
-    .min(10, "The description should be at least 10 characters long")
-    .optional(),
+  description: z.string(),
 });
 
 export type TransferFormDTO = z.infer<typeof transferFormSchema> & {
