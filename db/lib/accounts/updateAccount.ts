@@ -5,7 +5,7 @@ import { getAllAccounts } from "./getAllAccounts";
 
 export const updateAccount = async (
   accountId: Account["id"],
-  updates: Partial<Omit<Account, "id" | "ownerId">>,
+  updates: Partial<Pick<Account, "name">>,
 ) => {
   const accounts = await getAllAccounts();
   const index = accounts.findIndex((account) => account.id === accountId);

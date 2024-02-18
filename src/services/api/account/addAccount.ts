@@ -1,7 +1,7 @@
-import { AccountFormDTO } from "@/schemas/account";
+import { AddAccountFormDTO } from "@/schemas/account";
 import { fetchJson } from "@/services/api/fetchJson";
 
-export const addAccount = async (accountFormData: AccountFormDTO) => {
+export const addAccount = async (accountFormData: AddAccountFormDTO) => {
   await fetchJson("/api/accounts", {
     method: "POST",
     headers: {

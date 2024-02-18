@@ -1,4 +1,4 @@
-import { AccountFormDTO, accountFormSchema } from "@/schemas/account";
+import { AddAccountFormDTO, addAccountFormSchema } from "@/schemas/account";
 import { addAccount } from "@/services/api/account/addAccount";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -16,14 +16,14 @@ export const useAddAccountForm = () => {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<AccountFormDTO>({
+  } = useForm<AddAccountFormDTO>({
     defaultValues: {
       ownerId: undefined,
       name: "",
       currency: "EUR",
       balance: undefined,
     },
-    resolver: zodResolver(accountFormSchema),
+    resolver: zodResolver(addAccountFormSchema),
   });
 
   const { mutate, isPending } = useMutation({

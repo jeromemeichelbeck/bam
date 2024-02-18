@@ -1,7 +1,8 @@
 import { availableCurrencies } from "@/constants/currencies";
+import { Account } from "@/types/account";
 import { z } from "zod";
 
-export const accountFormSchema = z.object({
+export const addAccountFormSchema = z.object({
   ownerId: z.coerce
     .number({ invalid_type_error: "Please select an owner" })
     .int("Please select an owner")
@@ -13,4 +14,12 @@ export const accountFormSchema = z.object({
     .positive("Initial balance must be positive"),
 });
 
-export type AccountFormDTO = z.infer<typeof accountFormSchema>;
+export type AddAccountFormDTO = z.infer<typeof addAccountFormSchema>;
+
+export const updateAccountFormSchema = z.object({
+  name: z.string().min(1, "Account name is required"),
+});
+
+export type UpdateAccountFormDTO = { id: Account["id"] } & z.infer<
+  typeof updateAccountFormSchema
+>;

@@ -1,11 +1,11 @@
 import { availableCurrencies } from "@/constants/currencies";
-import { AccountFormDTO } from "@/schemas/account";
+import { AddAccountFormDTO } from "@/schemas/account";
 import { FC } from "react";
 import { Control } from "react-hook-form";
 import ControlledSelect from "../UI/form/ControlledSelect";
 
 type CurrencySelectorProps = {
-  control: Control<AccountFormDTO>;
+  control: Control<AddAccountFormDTO>;
 };
 
 const CurrencySelect: FC<CurrencySelectorProps> = ({ control }) => {

@@ -42,7 +42,7 @@ export default async function handler(
         });
       }
 
-    case "PUT":
+    case "PATCH":
       const account = await getOneAccountById(accountId);
       if (!account) {
         return res.status(404).json({
@@ -51,7 +51,7 @@ export default async function handler(
         });
       }
 
-      const { name, currency, balance } = req.body;
+      const { name } = req.body;
 
       if (name) {
         // Search by name
@@ -75,8 +75,6 @@ export default async function handler(
       try {
         const updatedAccount = await updateAccount(accountId, {
           name,
-          currency,
-          balance,
         });
         if (!updatedAccount) {
           // Should not happen
