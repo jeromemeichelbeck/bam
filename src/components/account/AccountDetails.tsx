@@ -7,11 +7,11 @@ import {
   Box,
   IconButton,
   Paper,
+  Skeleton,
   Stack,
   Typography,
 } from "@mui/material";
 import { FC, useState } from "react";
-import Skeleton from "react-loading-skeleton";
 import AddTransferButton from "../transfer/AddTransferButton";
 import TransferList from "../transfer/TransferList";
 

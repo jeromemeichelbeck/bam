@@ -7,6 +7,7 @@ import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import {
   Alert,
   Paper,
+  Skeleton,
   Table,
   TableBody,
   TableCell,
@@ -17,7 +18,6 @@ import {
   useTheme,
 } from "@mui/material";
 import { FC } from "react";
-import Skeleton from "react-loading-skeleton";
 import ListPagination from "../UI/list/ListPagination";
 import ListRow from "../UI/list/ListRow";
 import LoadingTableRows from "../UI/list/LoadingTableRows";

@@ -1,7 +1,6 @@
 import { Container, Stack } from "@mui/material";
 import dynamic from "next/dynamic";
 import { FC } from "react";
-import "react-loading-skeleton/dist/skeleton.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./Footer";
