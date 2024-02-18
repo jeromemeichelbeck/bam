@@ -1,4 +1,4 @@
-import AccountContainer from "@/components/account/AccountContainer";
+import AccountListContainer from "@/components/account/AccountListContainer";
 import Head from "next/head";
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <AccountContainer />
+        <AccountListContainer />
       </main>
     </>
   );

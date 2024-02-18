@@ -4,9 +4,9 @@ import { FC } from "react";
 import AccountList from "./AccountList";
 import AddAccountButton from "./AddAccountButton";
 
-type AccountContainerProps = {};
+type AccountListContainerProps = {};
 
-const AccountContainer: FC<AccountContainerProps> = () => {
+const AccountListContainer: FC<AccountListContainerProps> = () => {
   const { q, setQ } = useQ();
 
   return (
@@ -22,4 +22,4 @@ const AccountContainer: FC<AccountContainerProps> = () => {
   );
 };
 
-export default AccountContainer;
+export default AccountListContainer;
