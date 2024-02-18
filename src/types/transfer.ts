@@ -1,6 +1,6 @@
 import { Account } from "./account";
 
-export type Transfert = {
+export type Transfer = {
   id: number;
   date: string; // ISO 8601
   fromAccountId: Account["id"];

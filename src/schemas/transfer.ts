@@ -1,7 +1,7 @@
 import { Owner } from "@/types/owner";
 import { z } from "zod";
 
-export const transfertFormSchema = z.object({
+export const transferFormSchema = z.object({
   fromOwnerId: z.coerce
     .number({ invalid_type_error: "Please select a source account owner" })
     .int("Please select a source account owner")
@@ -27,7 +27,7 @@ export const transfertFormSchema = z.object({
     .optional(),
 });
 
-export type TransfertFormDTO = z.infer<typeof transfertFormSchema> & {
+export type TransferFormDTO = z.infer<typeof transferFormSchema> & {
   fromOwnerId: Owner["id"];
   toOwnerId: Owner["id"];
 };

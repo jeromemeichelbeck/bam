@@ -3,8 +3,13 @@
     "id": 1,
     "date": "2024-02-11T08:30:00Z",
     "fromAccountId": 1,
+    "fromAccountName": "John's USD Account",
     "toAccountId": 2,
+    "toAccountName": "Emily's EUR Account",
     "amount": 50000,
+    "currency": "USD",
+    "toAmount": 60000,
+    "toCurrency": "EUR",
     "rate": 1.2,
     "description": "Payment for services rendered"
   },
@@ -12,7 +17,9 @@
     "id": 2,
     "date": "2024-02-11T09:15:00Z",
     "fromAccountId": 3,
+    "fromAccountName": "Michael's GBP Account",
     "toAccountId": 4,
+    "toAccountName": "Sarah's USD Account",
     "amount": 75000,
     "rate": 0.9,
     "description": "Reimbursement for expenses"
@@ -106,5 +113,31 @@
     "amount": 70000,
     "rate": 1.05,
     "description": "Payment for rent"
+  },
+  {
+    "fromAccountId": 1,
+    "fromAccountName": "John's USD Account",
+    "toAccountId": 32,
+    "toAccountName": "Emily's JPY Account",
+    "amount": 12312300,
+    "description": "Test lolss",
+    "id": 13,
+    "date": "2024-02-18T15:34:43.807Z",
+    "currency": "USD",
+    "toAmount": 1354353000,
+    "toCurrency": "JPY",
+    "rate": 110
+  },
+  {
+    "fromAccountId": 2,
+    "toAccountId": 1,
+    "amount": 1400,
+    "description": "testfffffff",
+    "id": 14,
+    "date": "2024-02-18T15:51:41.150Z",
+    "currency": "EUR",
+    "toAmount": 1568,
+    "toCurrency": "USD",
+    "rate": 1.12
   }
 ]

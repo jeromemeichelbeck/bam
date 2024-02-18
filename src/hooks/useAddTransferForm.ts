@@ -1,5 +1,5 @@
-import { TransfertFormDTO, transfertFormSchema } from "@/schemas/transfert";
-import { addTransfert } from "@/services/api/transferts/addTransfert";
+import { TransferFormDTO, transferFormSchema } from "@/schemas/transfer";
+import { addTransfer } from "@/services/api/transfer/addTransfer";
 import { Account } from "@/types/account";
 import { Owner } from "@/types/owner";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-export const useAddTransfertForm = (
+export const useAddTransferForm = (
   ownerId?: Owner["id"],
   accountId?: Account["id"],
 ) => {
@@ -22,7 +22,7 @@ export const useAddTransfertForm = (
     setError,
     setValue,
     ...form
-  } = useForm<TransfertFormDTO>({
+  } = useForm<TransferFormDTO>({
     defaultValues: {
       fromOwnerId: undefined,
       fromAccountId: undefined,
@@ -32,7 +32,7 @@ export const useAddTransfertForm = (
       description: "",
     },
     mode: "onChange",
-    resolver: zodResolver(transfertFormSchema),
+    resolver: zodResolver(transferFormSchema),
   });
 
   // Change default values when ownerId or accountId are provided
@@ -46,11 +46,11 @@ export const useAddTransfertForm = (
   }, [ownerId, accountId, setValue]);
 
   const { mutate, ...mutation } = useMutation({
-    mutationFn: addTransfert,
+    mutationFn: addTransfer,
     onSuccess: () => {
-      toast.success("Transfert done successfully");
+      toast.success("Transfer done successfully");
 
-      queryClient.invalidateQueries({ queryKey: ["transferts"] });
+      queryClient.invalidateQueries({ queryKey: ["transfers"] });
 
       if (accountId) {
         router.push(`/account/${accountId}`);
@@ -63,7 +63,7 @@ export const useAddTransfertForm = (
     },
   });
 
-  const handleAddTransfert = handleSubmit(async (data) => {
+  const handleAddTransfer = handleSubmit(async (data) => {
     mutate(data);
   });
 
@@ -71,6 +71,6 @@ export const useAddTransfertForm = (
     ...form,
     ...mutation,
     errors,
-    handleAddTransfert,
+    handleAddTransfer,
   };
 };

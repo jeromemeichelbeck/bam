@@ -1,9 +1,9 @@
 import { useGetOneAccount } from "@/hooks/useGetOneAccount";
 import { useGetOneOwner } from "@/hooks/useGetOneOwner";
-import { TransfertFormDTO } from "@/schemas/transfert";
+import { TransferFormDTO } from "@/schemas/transfer";
 import { Control } from "react-hook-form";
 
-export const useTransfertSummary = (control: Control<TransfertFormDTO>) => {
+export const useTransferSummary = (control: Control<TransferFormDTO>) => {
   const {
     fromOwnerId,
     fromAccountId,

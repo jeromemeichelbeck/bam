@@ -2,9 +2,9 @@ import ControlledInput from "@/components/UI/form/ControlledInput";
 import { Typography } from "@mui/material";
 import { FC } from "react";
 import AmountInput from "../shared/AmountInput";
-import { TransfertStepProps } from "./TransfertStepper";
+import { TransferStepProps } from "./TransferStepper";
 
-const AmountStep: FC<TransfertStepProps> = ({ control }) => {
+const AmountStep: FC<TransferStepProps> = ({ control }) => {
   return (
     <>
       <Typography variant="h4">Select the amount to transfer</Typography>

@@ -1,18 +1,18 @@
-import { useTransfertSummary } from "@/hooks/useTransfertSummary";
+import { useTransferSummary } from "@/hooks/useTransferSummary";
 import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import { ArrowCircleRightTwoTone } from "@mui/icons-material";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import { FC } from "react";
 import Skeleton from "react-loading-skeleton";
-import { TransfertStepProps } from "./TransfertStepper";
+import { TransferStepProps } from "./TransferStepper";
 
-const SummaryStep: FC<TransfertStepProps> = ({ control }) => {
+const SummaryStep: FC<TransferStepProps> = ({ control }) => {
   const { fromOwner, fromAccount, toOwner, toAccount, amount, description } =
-    useTransfertSummary(control);
+    useTransferSummary(control);
 
   return (
     <>
-      <Typography variant="h4">Summary of the fund transfert</Typography>
+      <Typography variant="h4">Summary of the fund transfer</Typography>
       <Box display="flex" flexDirection="row" justifyContent="space-around">
         <Card>
           <CardContent>
@@ -63,7 +63,7 @@ const SummaryStep: FC<TransfertStepProps> = ({ control }) => {
           </CardContent>
         </Card>
       </Box>
-      <p>Summary of the transfert</p>
+      <p>Summary of the transfer</p>
     </>
   );
 };

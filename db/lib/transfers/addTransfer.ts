@@ -1,19 +1,19 @@
-import { Transfert } from "@/types/transfert";
+import { Transfer } from "@/types/transfer";
 import { getOneAccountById } from "../accounts/getOneAccountById";
 import { updateAccount } from "../accounts/updateAccount";
 import { getOneRate } from "../rates/getOneRate";
 import { saveEntities } from "../shared/saveEntities";
-import { getAllTransferts } from "./getAllTranferts";
+import { getAllTransfers } from "./getAllTranfert";
 
 type TranfertDTO = Pick<
-  Transfert,
+  Transfer,
   "fromAccountId" | "toAccountId" | "amount" | "description"
 >;
 
-export const addTransfert = async (transfert: TranfertDTO) => {
+export const addTransfer = async (transfer: TranfertDTO) => {
   const [fromAccount, toAccount] = await Promise.all([
-    getOneAccountById(transfert.fromAccountId),
-    getOneAccountById(transfert.toAccountId),
+    getOneAccountById(transfer.fromAccountId),
+    getOneAccountById(transfer.toAccountId),
   ]);
 
   if (!fromAccount) {
@@ -25,14 +25,14 @@ export const addTransfert = async (transfert: TranfertDTO) => {
 
   const rate = await getOneRate(fromAccount.currency, toAccount.currency);
 
-  const transferts = await getAllTransferts();
+  const transfers = await getAllTransfers();
 
-  const toAmount = Math.round(transfert.amount * rate);
+  const toAmount = Math.round(transfer.amount * rate);
 
   try {
     // We won't check the balance on backend because it is out of scope
     updateAccount(fromAccount.id, {
-      balance: fromAccount.balance - transfert.amount,
+      balance: fromAccount.balance - transfer.amount,
     });
   } catch (error) {
     throw new Error(
@@ -49,13 +49,12 @@ export const addTransfert = async (transfert: TranfertDTO) => {
     );
   }
 
-  const id =
-    transferts.length < 1 ? 1 : transferts[transferts.length - 1].id + 1;
+  const id = transfers.length < 1 ? 1 : transfers[transfers.length - 1].id + 1;
 
   const date = new Date().toISOString();
 
-  const newTransfert = {
-    ...transfert,
+  const newTransfer = {
+    ...transfer,
     id,
     date,
     fromAccountName: fromAccount.name,
@@ -66,9 +65,9 @@ export const addTransfert = async (transfert: TranfertDTO) => {
     rate,
   };
 
-  transferts.push(newTransfert);
+  transfers.push(newTransfer);
 
-  await saveEntities(transferts, "transferts");
+  await saveEntities(transfers, "transfers");
 
-  return newTransfert;
+  return newTransfer;
 };

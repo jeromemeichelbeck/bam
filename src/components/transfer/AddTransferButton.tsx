@@ -4,12 +4,12 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import { FC } from "react";
 
-type AddTransfertButtonProps = {
+type AddTransferButtonProps = {
   ownerId?: Owner["id"];
   accountId?: Account["id"];
 };
 
-const AddTransfertButton: FC<AddTransfertButtonProps> = ({
+const AddTransferButton: FC<AddTransferButtonProps> = ({
   ownerId,
   accountId,
 }) => {
@@ -23,14 +23,14 @@ const AddTransfertButton: FC<AddTransfertButtonProps> = ({
 
   return (
     <Link
-      href={`/transfert/add${searchParams ? `?${searchParams}` : ""}`}
+      href={`/transfer/add${searchParams ? `?${searchParams}` : ""}`}
       passHref
     >
       <Button variant="contained" color="primary">
-        Make a new fund transfert{accountId ? " from this account" : ""}
+        Make a new fund transfer{accountId ? " from this account" : ""}
       </Button>
     </Link>
   );
 };
 
-export default AddTransfertButton;
+export default AddTransferButton;

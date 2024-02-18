@@ -3,25 +3,25 @@ import { FC } from "react";
 import { useController } from "react-hook-form";
 import AccountSelect from "../shared/AccountSelect";
 import OwnerSelect from "../shared/OwnerSelect";
-import { TransfertStepProps } from "./TransfertStepper";
+import { TransferStepProps } from "./TransferStepper";
 
-const ToAccountStep: FC<TransfertStepProps> = ({ control }) => {
+const FromAccountStep: FC<TransferStepProps> = ({ control }) => {
   const {
-    field: { value: toOwnerId },
-  } = useController({ name: "toOwnerId", control });
+    field: { value: fromOwnerId },
+  } = useController({ name: "fromOwnerId", control });
 
   return (
     <>
-      <Typography variant="h4">Select destination account</Typography>
+      <Typography variant="h4">Select source account</Typography>
       <Typography variant="h5">Select the Account owner:</Typography>
-      <OwnerSelect control={control} name="toOwnerId" />
-      {toOwnerId && (
+      <OwnerSelect control={control} name="fromOwnerId" />
+      {fromOwnerId && (
         <>
           <Typography variant="h5">Select the Account:</Typography>
           <AccountSelect
-            name="toAccountId"
+            name="fromAccountId"
             control={control}
-            ownerId={toOwnerId}
+            ownerId={fromOwnerId}
           />
         </>
       )}
@@ -29,4 +29,4 @@ const ToAccountStep: FC<TransfertStepProps> = ({ control }) => {
   );
 };
 
-export default ToAccountStep;
+export default FromAccountStep;

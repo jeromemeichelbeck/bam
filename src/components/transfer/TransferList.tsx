@@ -1,6 +1,7 @@
-import { useSearchTransfertsQuery } from "@/hooks/useSearchTransfertsQuery";
+import { useSearchTransfersQuery } from "@/hooks/useSearchTransfersQuery";
+import { useSort } from "@/hooks/useSort";
 import { Account } from "@/types/account";
-import { Transfert } from "@/types/transfert";
+import { Transfer } from "@/types/transfer";
 import { getFormatedDateTime } from "@/utils/formatting/getFormatedDateTime";
 import { getFormattedAmount } from "@/utils/formatting/getFormattedAmount";
 import {
@@ -21,48 +22,51 @@ import ListPagination from "../UI/list/ListPagination";
 import ListRow from "../UI/list/ListRow";
 import LoadingTableRows from "../UI/list/LoadingTableRows";
 
-type TransfertListAmountProps = {
+type TransferListAmountProps = {
   accountId?: Account["id"];
-  transfert?: Transfert;
+  transfer?: Transfer;
 };
 
-const TransfertListAmount: FC<TransfertListAmountProps> = ({
+const TransferListAmount: FC<TransferListAmountProps> = ({
   accountId,
-  transfert,
+  transfer,
 }) => {
   const theme = useTheme();
-  if (!accountId || !transfert) return <Skeleton />;
+  if (!accountId || !transfer) return <Skeleton />;
 
-  return transfert.fromAccountId === accountId ? (
+  return transfer.fromAccountId === accountId ? (
     <Typography color={theme.palette.error.main}>
-      {`- ${getFormattedAmount(transfert.amount, transfert.currency)}`}
+      {`- ${getFormattedAmount(transfer.amount, transfer.currency)}`}
     </Typography>
   ) : (
     <Typography color={theme.palette.success.main}>
-      {getFormattedAmount(transfert.toAmount, transfert.toCurrency)}
+      {getFormattedAmount(transfer.toAmount, transfer.toCurrency)}
     </Typography>
   );
 };
 
-type TransfertListProps = {
+type TransferListProps = {
   accountId?: Account["id"];
 };
 
-const TransfertList: FC<TransfertListProps> = ({ accountId }) => {
+const TransferList: FC<TransferListProps> = ({ accountId }) => {
   const theme = useTheme();
 
-  const {
-    data: transferts,
-    isLoading: isTransfertsLoading,
-    error,
-  } = useSearchTransfertsQuery(accountId);
+  const { sortBy, sortOrder, setSortParams } = useSort({
+    sortBy: "date",
+    sortOrder: "desc",
+  });
 
-  console.log(transferts?.data || []);
+  const {
+    data: transfers,
+    isLoading: isTransfersLoading,
+    error,
+  } = useSearchTransfersQuery(accountId);
 
   return (
     <TableContainer component={Paper}>
       {error && <Alert severity="error">{error.message}</Alert>}
-      <Table aria-label="Transferts list">
+      <Table aria-label="Transfers list">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
@@ -71,23 +75,23 @@ const TransfertList: FC<TransfertListProps> = ({ accountId }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {isTransfertsLoading && !error ? (
+          {isTransfersLoading && !error ? (
             <LoadingTableRows cols={3} />
           ) : (
-            (transferts?.data || []).map((transfert, index) => (
+            (transfers?.data || []).map((transfer, index) => (
               <ListRow
-                key={transfert.id}
+                key={transfer.id}
                 data={[
-                  transfert.date ? (
-                    getFormatedDateTime(transfert.date)
+                  transfer.date ? (
+                    getFormatedDateTime(transfer.date)
                   ) : (
                     <Skeleton />
                   ),
-                  transfert.description || <Skeleton />,
-                  transfert.amount && transfert.currency ? (
-                    <TransfertListAmount
+                  transfer.description || <Skeleton />,
+                  transfer.amount && transfer.currency ? (
+                    <TransferListAmount
                       accountId={accountId}
-                      transfert={transfert}
+                      transfer={transfer}
                     />
                   ) : (
                     <Skeleton />
@@ -104,9 +108,9 @@ const TransfertList: FC<TransfertListProps> = ({ accountId }) => {
           )}
         </TableBody>
       </Table>
-      <ListPagination total={transferts?.count} />
+      <ListPagination total={transfers?.count} />
     </TableContainer>
   );
 };
 
-export default TransfertList;
+export default TransferList;

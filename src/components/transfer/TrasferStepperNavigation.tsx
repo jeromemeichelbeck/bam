@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { FC } from "react";
 
-type TransfertStepperNavigationProps = {
+type TransferStepperNavigationProps = {
   backLabel: string;
   disableBack: boolean;
   handleBack: () => void;
@@ -10,7 +10,7 @@ type TransfertStepperNavigationProps = {
   handleNext: () => void;
 };
 
-const TransfertStepperNavigation: FC<TransfertStepperNavigationProps> = ({
+const TransferStepperNavigation: FC<TransferStepperNavigationProps> = ({
   backLabel,
   disableBack,
   handleBack,
@@ -29,4 +29,4 @@ const TransfertStepperNavigation: FC<TransfertStepperNavigationProps> = ({
   );
 };
 
-export default TransfertStepperNavigation;
+export default TransferStepperNavigation;

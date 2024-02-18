@@ -1,8 +1,8 @@
 import { useAccountId } from "@/hooks/useAccountId";
-import { useAddTransfertForm } from "@/hooks/useAddTransfertForm";
+import { useAddTransferForm } from "@/hooks/useAddTransferForm";
 import { useGetOneAccount } from "@/hooks/useGetOneAccount";
 import { useOwnerId } from "@/hooks/useOwnerId";
-import { TransfertFormDTO } from "@/schemas/transfert";
+import { TransferFormDTO } from "@/schemas/transfer";
 import {
   Box,
   Button,
@@ -18,20 +18,20 @@ import AmountStep from "./AmountStep";
 import FromAccountStep from "./FromAccountStep";
 import SummaryStep from "./SummaryStep";
 import ToAccountStep from "./ToAccountStep";
-import TransfertStepperNavigation from "./TrasfertStepperNavigation";
+import TransferStepperNavigation from "./TrasferStepperNavigation";
 
-export type TransfertStepProps = {
-  control: Control<TransfertFormDTO>;
+export type TransferStepProps = {
+  control: Control<TransferFormDTO>;
 };
 
-const TransfertStepper: FC = () => {
+const TransferStepper: FC = () => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(0);
 
   const { ownerId } = useOwnerId();
   const { accountId } = useAccountId();
 
-  const { control, handleAddTransfert, trigger } = useAddTransfertForm(
+  const { control, handleAddTransfer, trigger } = useAddTransferForm(
     ownerId,
     accountId,
   );
@@ -71,7 +71,7 @@ const TransfertStepper: FC = () => {
     }
 
     if (activeStep === 3) {
-      return handleAddTransfert();
+      return handleAddTransfer();
     }
 
     if (!checked) {
@@ -136,7 +136,7 @@ const TransfertStepper: FC = () => {
       ) : (
         <>
           {steps[activeStep].component}
-          <TransfertStepperNavigation
+          <TransferStepperNavigation
             backLabel={activeStep > 0 ? "Back" : "Cancel"}
             disableBack={activeStep === 0 && !accountId && !ownerId}
             handleBack={handleBack}
@@ -150,4 +150,4 @@ const TransfertStepper: FC = () => {
   );
 };
 
-export default TransfertStepper;
+export default TransferStepper;
