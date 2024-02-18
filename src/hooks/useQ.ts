@@ -7,7 +7,7 @@ export const useQ = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const q = searchParams.get("q");
+  const q = searchParams.get("q") ?? "";
 
   const setQ = useCallback(
     (q: string) => {

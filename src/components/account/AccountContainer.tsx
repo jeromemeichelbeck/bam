@@ -16,7 +16,7 @@ const AccountContainer: FC<AccountContainerProps> = () => {
         value={q}
         onChange={(e) => setQ(e.target.value)}
       />
-      <AccountList q={q || undefined} />
+      <AccountList q={q} />
       <AddAccountButton />
     </Stack>
   );
