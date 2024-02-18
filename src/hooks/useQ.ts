@@ -10,7 +10,7 @@ export const useQ = () => {
   const q = searchParams.get("q");
 
   const setQ = useCallback(
-    (q: number) => {
+    (q: string) => {
       const params = new URLSearchParams(searchParams.toString());
       params.set("q", q.toString());
       router.push(`${pathname}?${params}`);

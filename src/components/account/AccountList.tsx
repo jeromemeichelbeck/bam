@@ -17,9 +17,11 @@ import ListPagination from "../UI/list/ListPagination";
 import ListRow from "../UI/list/ListRow";
 import LoadingTableRows from "../UI/list/LoadingTableRows";
 
-type AccountListProps = {};
+type AccountListProps = {
+  q?: string;
+};
 
-const AccountList: FC<AccountListProps> = () => {
+const AccountList: FC<AccountListProps> = ({ q }) => {
   const theme = useTheme();
   const router = useRouter();
 
@@ -27,7 +29,7 @@ const AccountList: FC<AccountListProps> = () => {
     data: accounts,
     isLoading: isAccountsLoading,
     error,
-  } = useSearchAccountsQuery();
+  } = useSearchAccountsQuery(q);
 
   return (
     <TableContainer component={Paper}>

@@ -1,4 +1,5 @@
-import { Stack } from "@mui/material";
+import { useQ } from "@/hooks/useQ";
+import { Stack, TextField } from "@mui/material";
 import { FC } from "react";
 import AccountList from "./AccountList";
 import AddAccountButton from "./AddAccountButton";
@@ -6,9 +7,16 @@ import AddAccountButton from "./AddAccountButton";
 type AccountContainerProps = {};
 
 const AccountContainer: FC<AccountContainerProps> = () => {
+  const { q, setQ } = useQ();
+
   return (
     <Stack gap={2} alignItems="flex-end">
-      <AccountList />
+      <TextField
+        label="Search"
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+      />
+      <AccountList q={q || undefined} />
       <AddAccountButton />
     </Stack>
   );
