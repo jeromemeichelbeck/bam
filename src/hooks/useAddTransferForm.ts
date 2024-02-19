@@ -19,6 +19,7 @@ export const useAddTransferForm = (
   const {
     handleSubmit,
     formState: { errors },
+    watch,
     setError,
     setValue,
     ...form
@@ -70,6 +71,7 @@ export const useAddTransferForm = (
   return {
     ...form,
     ...mutation,
+    values: watch(),
     errors,
     handleAddTransfer,
   };

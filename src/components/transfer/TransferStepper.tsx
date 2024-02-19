@@ -6,7 +6,7 @@ import { TransferFormDTO } from "@/schemas/transfer";
 import { Step, StepLabel, Stepper } from "@mui/material";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
-import { Control, useController } from "react-hook-form";
+import { Control } from "react-hook-form";
 import AmountStep from "./AmountStep";
 import FromAccountStep from "./FromAccountStep";
 import SummaryStep from "./SummaryStep";
@@ -15,6 +15,7 @@ import TransferStepperNavigation from "./TrasferStepperNavigation";
 
 export type TransferStepProps = {
   control: Control<TransferFormDTO>;
+  values: TransferFormDTO;
 };
 
 const TransferStepper: FC = () => {
@@ -24,18 +25,10 @@ const TransferStepper: FC = () => {
   const { ownerId } = useOwnerId();
   const { accountId } = useAccountId();
 
-  const { control, handleAddTransfer, trigger, isPending } = useAddTransferForm(
-    ownerId,
-    accountId,
-  );
+  const { control, values, handleAddTransfer, trigger, isPending } =
+    useAddTransferForm(ownerId, accountId);
 
-  const {
-    field: { value: fromAccountId },
-  } = useController({ name: "fromAccountId", control });
-
-  const {
-    field: { value: amount },
-  } = useController({ name: "amount", control });
+  const { fromAccountId, amount } = values;
 
   const { data: fromAccount } = useGetOneAccount(fromAccountId);
 
@@ -91,14 +84,20 @@ const TransferStepper: FC = () => {
   const steps = [
     {
       label: "Select source account",
-      component: <FromAccountStep control={control} />,
+      component: <FromAccountStep control={control} values={values} />,
     },
     {
       label: "Select destination account",
-      component: <ToAccountStep control={control} />,
+      component: <ToAccountStep control={control} values={values} />,
     },
-    { label: "Enter amount", component: <AmountStep control={control} /> },
-    { label: "Summary", component: <SummaryStep control={control} /> },
+    {
+      label: "Enter amount",
+      component: <AmountStep control={control} values={values} />,
+    },
+    {
+      label: "Summary",
+      component: <SummaryStep control={control} values={values} />,
+    },
   ];
 
   return (

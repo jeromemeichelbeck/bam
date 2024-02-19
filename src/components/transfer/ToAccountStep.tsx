@@ -1,14 +1,11 @@
 import { Typography } from "@mui/material";
 import { FC } from "react";
-import { useController } from "react-hook-form";
 import AccountSelect from "../shared/AccountSelect";
 import OwnerSelect from "../shared/OwnerSelect";
 import { TransferStepProps } from "./TransferStepper";
 
-const ToAccountStep: FC<TransferStepProps> = ({ control }) => {
-  const {
-    field: { value: toOwnerId },
-  } = useController({ name: "toOwnerId", control });
+const ToAccountStep: FC<TransferStepProps> = ({ control, values }) => {
+  const { toOwnerId } = values;
 
   return (
     <>
