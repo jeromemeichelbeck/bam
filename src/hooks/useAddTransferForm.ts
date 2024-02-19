@@ -29,7 +29,7 @@ export const useAddTransferForm = (
       fromAccountId: undefined,
       toOwnerId: undefined,
       toAccountId: undefined,
-      amount: undefined,
+      amount: 0,
       description: "",
     },
     mode: "onChange",

@@ -20,7 +20,9 @@ const AmountInput = <TFieldValues extends FieldValues>({
       name={name}
       control={control}
       // Limit to 2 decimals
-      fromInput={(value) => Math.round(parseFloat(value) * 100).toString()}
+      fromInput={(value) =>
+        value ? Math.round(parseFloat(value) * 100).toString() : "0"
+      }
       toInput={(value) => limitDecimals(parseFloat(value) / 100, 2)}
     />
   );
